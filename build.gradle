@@ -3,7 +3,7 @@ buildscript {
     ext {
         kotlinVersion = '1.4.0'
         navigationVersion = '2.3.0'
-        hiltVersion = '2.28.3-alpha'
+        hiltVersion = '2.31.2-alpha'
     }
     repositories {
         google()
@@ -34,9 +34,9 @@ task clean(type: Delete) {
 // Define versions in a single place
 ext {
     // Sdk and tools
-    minSdkVersion = 21
-    targetSdkVersion = 29
-    compileSdkVersion = 29
+    minSdkVersion = 23
+    targetSdkVersion = 30
+    compileSdkVersion = 30
 
     // App dependencies
     appCompatVersion = '1.2.0'

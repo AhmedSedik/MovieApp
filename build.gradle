@@ -1,9 +1,9 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext {
-        kotlinVersion = '1.4.0'
+        kotlinVersion = '1.4.30'
         navigationVersion = '2.3.0'
-        hiltVersion = '2.31.2-alpha'
+        hiltVersion = '2.33-beta'
 
         // Sdk and tools
         minSdkVersion = 23
@@ -31,6 +31,7 @@ buildscript {
         okhttpLoggingVersion = '4.7.2'
         timberVersion = '4.7.1'
         versionMoshi = "1.9.3"
+        recyclerViewVersion = "1.2.1"
     }
     repositories {
         google()

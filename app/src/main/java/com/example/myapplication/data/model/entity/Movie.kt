@@ -1,7 +1,9 @@
 package com.example.myapplication.data.model.entity
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class Movie(
 
     @Json(name = "id")

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="movie"
+            type="com.example.myapplication.data.model.entity.Movie" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="14dp"
+    android:clickable="true">
+
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="108dp"
+        android:layout_height="162dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:bind_poster_path="@{movie.posterPath}"
+        tools:src="@tools:sample/avatars[12]"/>
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="0dp"
+        style="@style/CardView"
+        android:layout_height="wrap_content"
+        android:alpha=".8"
+        android:ellipsize="end"
+        android:lines="2"
+        android:paddingTop="5dp"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="@id/image"
+        app:layout_constraintRight_toRightOf="@id/image"
+        app:layout_constraintTop_toBottomOf="@id/image"
+        tools:text="Title"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

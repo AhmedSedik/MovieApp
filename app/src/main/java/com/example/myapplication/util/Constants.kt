@@ -7,5 +7,10 @@ object Constants {
 
     const val API_VERSION: Int = 3
     const val BASE_URL= "https://api.themoviedb.org/"
+    private const val BASE_POSTER_URL = "https://image.tmdb.org/t/p/w185"
+
+
+
+    fun getPosterUrl(path: String?) = BASE_POSTER_URL + path
 
 }

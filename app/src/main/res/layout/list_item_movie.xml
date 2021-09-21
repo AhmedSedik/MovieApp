@@ -34,6 +34,7 @@
         android:lines="2"
         android:paddingTop="5dp"
         android:textSize="12sp"
+        android:text="@{movie.title}"
         app:layout_constraintLeft_toLeftOf="@id/image"
         app:layout_constraintRight_toRightOf="@id/image"
         app:layout_constraintTop_toBottomOf="@id/image"

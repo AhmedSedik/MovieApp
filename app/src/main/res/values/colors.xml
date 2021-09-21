@@ -8,4 +8,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background">#424242</color>
+
+    <color name="colorPrimary">#FF424242</color>
+    <color name="colorPrimaryDark">#FF424242</color>
+    <color name="colorSecondary">#ffffff</color>
+    <color name="colorAccent">#448aff</color>
+    <!-- <color name="colorAccent">#eb5757</color> -->
+    <color name="colorNavigation">#448aff</color>
+
 </resources>

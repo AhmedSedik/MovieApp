@@ -1,18 +1,22 @@
 package com.example.myapplication.di
 
+import androidx.lifecycle.ViewModel
 import com.example.myapplication.data.remote.MovieService
 import com.example.myapplication.data.remote.MovieServiceHelper
 import com.example.myapplication.data.remote.MovieServiceHelperImpl
 import com.example.myapplication.data.remote.RequestInterceptor
-import com.example.myapplication.data.repository.MovieRepository
 import com.example.myapplication.util.Constants.BASE_URL
+import com.example.myapplication.util.MovieListType
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.scopes.ViewModelScoped
 import dagger.hilt.components.SingletonComponent
+import dagger.multibindings.IntoMap
+import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import retrofit2.Converter
 import retrofit2.Retrofit
@@ -69,6 +73,15 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideApiHelper(apiHelper: MovieServiceHelperImpl): MovieServiceHelper = apiHelper
+
+    @Singleton
+    @Provides
+    fun provideIoDispatcher() = Dispatchers.IO
+
+
+
+
+
 
 
 }

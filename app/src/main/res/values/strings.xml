@@ -5,4 +5,8 @@
     <string name="poster_image">Poster Image</string>
     <string name="popular">Popular</string>
     <string name="view_all">ViewAll</string>
+    <string name="title_home">Home</string>
+    <string name="title_discover">Discover</string>
+    <string name="title_favourite">Favourite</string>
+    <string name="title_account">My Account</string>
 </resources>

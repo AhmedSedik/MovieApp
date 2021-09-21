@@ -13,8 +13,15 @@ import retrofit2.http.Query
  */
 interface MovieService {
 
-        @GET("$API_VERSION/movie/popular")
-         fun getPopularMovies(
-                @Query("page") page:Int
-        ): Call<MovieResponse>
+    @GET("$API_VERSION/movie/popular")
+    fun getPopularMovies(
+        @Query("page") page: Int
+    ): Call<MovieResponse>
+
+
+    @GET("$API_VERSION/discover/movie")
+    fun getMoviesList(
+        @Query("page") page: Int
+    ): Call<MovieResponse>
+
 }

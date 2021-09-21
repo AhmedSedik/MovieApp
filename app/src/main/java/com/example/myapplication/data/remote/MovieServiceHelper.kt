@@ -8,5 +8,7 @@ import retrofit2.Response
  * Created by Ahmad Sedeek on 9/19/2021.
  */
 interface MovieServiceHelper {
-    suspend fun getPopularMovies(part:Int): Call<MovieResponse>
+    suspend fun getPopularMovies(page:Int): Call<MovieResponse>
+
+    suspend fun getMovieList(page: Int) : Call<MovieResponse>
 }

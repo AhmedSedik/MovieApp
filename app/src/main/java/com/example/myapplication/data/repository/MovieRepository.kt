@@ -29,4 +29,15 @@ class MovieRepository @Inject constructor(private val movieService: MovieService
         )
     }
 
+    suspend fun getMoviesList(page: Int, errorText: (String) -> Unit)
+            : MutableLiveData<List<Movie>> {
+
+        val movieList = movieService.getMovieList(page)
+        return loadPageListCall(
+            {movieList},
+            MutableLiveData<List<Movie>>(),
+            errorText
+        )
+    }
+
 }

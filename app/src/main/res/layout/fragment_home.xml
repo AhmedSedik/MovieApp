@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.example.myapplication.util.MovieListType"/>
         <variable
             name="viewModel"
             type="com.example.myapplication.ui.home.HomeViewModel" />
@@ -29,6 +30,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/popular"
             android:textSize="18sp"
+            android:fontFamily="@font/roboto_mono"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,7 +41,8 @@
             android:clickable="true"
             android:fontFamily="@font/roboto_mono"
             android:text="@string/view_all"
-            android:textSize="13sp"
+            android:textSize="14sp"
+            android:onClick="@{() -> viewModel.viewAll(MovieListType.POPULAR)}"
             app:layout_constraintBottom_toBottomOf="@+id/popular_movie_text"
             app:layout_constraintRight_toRightOf="parent" />
 
@@ -49,12 +52,26 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:orientation="horizontal"
-            app:bind_movie_list="@{viewModel.popularMovieList}"
+            app:bind_movie_list="@{viewModel.popularMoviesMediatorLiveData}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/list_item_movie"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/popular_movie_text" />
+
+        <ProgressBar
+            android:id="@+id/popular_progress_bar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="@dimen/progress_bar"
+            android:layout_height="@dimen/progress_bar"
+            android:visibility="gone"
+            app:bind_progress_visibility="@{viewModel.popularMoviesMediatorLiveData}"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintBottom_toBottomOf="@+id/popular_recycler_view"
+            app:layout_constraintEnd_toEndOf="@+id/popular_recycler_view"
+            app:layout_constraintStart_toStartOf="@+id/popular_recycler_view"
+            app:layout_constraintTop_toTopOf="@+id/popular_recycler_view"
+            tools:visibility="visible"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

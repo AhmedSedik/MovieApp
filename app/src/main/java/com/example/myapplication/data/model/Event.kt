@@ -1,15 +1,23 @@
 package com.example.myapplication.data.model
 
 import androidx.lifecycle.Observer
+/* gist link
+https://gist.github.com/JoseAlcerreca/5b661f1800e1e654f07cc54fe87441af
+ */
 
+/**
+ * Used as a wrapper for data that is exposed via a LiveData that represents an event.
+ */
 open class Event<out T>(private val content: T) {
-    private var isHandled = false
-
+    private var hasBeenHandled = false
+    /**
+     * Returns the content and prevents its use again.
+     */
     fun getContentIfNotHandled(): T? {
-        return if (isHandled) {
+        return if (hasBeenHandled) {
             null
         } else {
-            isHandled = true
+            hasBeenHandled = true
             content
         }
     }

@@ -1,5 +1,7 @@
 package com.example.myapplication.ui.home.binding
 
+import android.opengl.Visibility
+import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -27,6 +29,8 @@ fun RecyclerView.bindMovieList(
     (this.adapter as MovieListAdapter).submitList(items)
 }
 
+
+
 @BindingAdapter("bind_poster_path")
 fun bindPosterImageWithPicasso(imgView: ImageView,path: String?) {
     if (path.isNullOrBlank()) {
@@ -35,4 +39,13 @@ fun bindPosterImageWithPicasso(imgView: ImageView,path: String?) {
     Picasso.get().load(Constants.getPosterUrl(path)).fit()
         .transform(RoundedCornersTransformation(4,1))
         .error(R.drawable.ic_baseline_image_24).into(imgView)
+}
+
+@BindingAdapter("bind_progress_visibility")
+fun View.bindProgressVisibility(items: List<Any>?) {
+    if (items == null) {
+        this.visibility = View.VISIBLE
+    } else {
+        this.visibility = View.GONE
+    }
 }

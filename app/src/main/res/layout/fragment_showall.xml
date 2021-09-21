@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.example.myapplication.util.MovieListType"/>
+        <variable
+            name="viewModel"
+            type="com.example.myapplication.ui.view_all.ViewAllViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="?attr/actionBarSize">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/show_all_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:bind_movie_list="@{viewModel.moviesListMediatorLiveData}"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="3"
+            tools:listitem="@layout/list_item_movie_grid"/>
+
+        <ProgressBar
+            android:id="@+id/moviesProgressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="@dimen/progress_bar"
+            android:layout_height="@dimen/progress_bar"
+            android:visibility="gone"
+            app:bind_progress_visibility="@{viewModel.moviesListMediatorLiveData}"
+            app:layout_constraintBottom_toBottomOf="@id/show_all_recyclerview"
+            app:layout_constraintEnd_toEndOf="@id/show_all_recyclerview"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/show_all_recyclerview"
+            app:layout_constraintTop_toTopOf="@id/show_all_recyclerview"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

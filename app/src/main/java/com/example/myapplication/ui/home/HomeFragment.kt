@@ -6,14 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.example.myapplication.R
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import com.example.myapplication.data.model.EventObserver
 import com.example.myapplication.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
-    private val HomeviewModel: HomeViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by viewModels()
 
 
     override fun onCreateView(
@@ -26,10 +28,18 @@ class HomeFragment : Fragment() {
             container,
             false
         ).apply {
-            viewModel = HomeviewModel
+            viewModel = homeViewModel
             lifecycleOwner = this@HomeFragment.viewLifecycleOwner
 
+
+
         }
+
+        homeViewModel.viewAllEvent.observe(viewLifecycleOwner, EventObserver {
+            val navigateAction = HomeFragmentDirections.actionHomeFragmentToShowAllFragment(it)
+            findNavController().navigate(navigateAction)
+
+        })
 
         return binding.root
     }

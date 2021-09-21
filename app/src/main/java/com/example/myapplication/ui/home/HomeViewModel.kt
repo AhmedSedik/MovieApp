@@ -1,16 +1,14 @@
 package com.example.myapplication.ui.home
 
 import androidx.lifecycle.*
+import com.example.myapplication.data.model.Event
 import com.example.myapplication.data.model.entity.Movie
 import com.example.myapplication.data.repository.MovieRepository
-import com.example.myapplication.extension.appendList
 import com.example.myapplication.extension.liveDataBlockScope
-import com.example.myapplication.util.Resource
-import dagger.assisted.Assisted
+import com.example.myapplication.util.MovieListType
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.Dispatchers
 import timber.log.Timber
-import java.lang.Exception
 import javax.inject.Inject
 
 /**
@@ -24,49 +22,53 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
 
-    //private val _loadPopularMovies = MutableLiveData<List<Movie>>()
 
     private val page = MutableLiveData<Int>().apply { value = 1 }
-    private val loadPopularMovies: LiveData<List<Movie>>
+    private val _popularMoviesLiveData: LiveData<List<Movie>>
+    val popularMoviesMediatorLiveData = MediatorLiveData<List<Movie>>()
 
-    val popularMovieList = MediatorLiveData<MutableList<Movie>>()
-    // get() = _loadPopularMovies.distinctUntilChanged()
-    //get() = _loadPopularMovies.distinctUntilChanged()
+    private val _viewAllEvent = MutableLiveData<Event<MovieListType>>()
+
+    val viewAllEvent: LiveData<Event<MovieListType>>
+    get() = _viewAllEvent
+
 
     init {
         Timber.d("view Model initiated")
 
-        loadPopularMovies = page.switchMap {
-            liveDataBlockScope {
-                movieRepository.getPopularMovies(it) {}
+        _popularMoviesLiveData = page.switchMap { page->
+            liveData(context = viewModelScope.coroutineContext +Dispatchers.IO) {
+                emitSource(movieRepository.getPopularMovies(page){})
             }
         }
 
-        popularMovieList.addSource(loadPopularMovies) { movies ->
-            movies?.let { list ->
-                popularMovieList.appendList(list)
-            }
+        popularMoviesMediatorLiveData.addSource(_popularMoviesLiveData) {
+            popularMoviesMediatorLiveData.value = it
         }
+
+
     }
 
 
-    fun loadMorePopular() {
+    fun loadMorePopularMovies() {
         page.value = page.value?.plus(1)
     }
 
-    /* private fun getPopularMovies() = viewModelScope.launch {
-
-         _status.value = MarsApiStatus.LOADING
-         try {
-             _loadPopularMovies.value = movieRepository.getPopularMovies()
-             _status.value = MarsApiStatus.DONE
-
-         } catch (e: Exception) {
-             _status.value = MarsApiStatus.ERROR
-             _loadPopularMovies.value = ArrayList()
-         }
-
-     }*/
+    fun viewAll(movieListType: MovieListType) {
+        Timber.d("ViewAll Clicked")
+        _viewAllEvent.value = Event(movieListType)
+    }
 
 }
 
+/*_popularMoviesLiveData = page.switchMap {
+          liveDataBlockScope {
+              movieRepository.getPopularMovies(it) {}
+          }
+      }*/
+
+/*  popularMoviesLiveData.addSource(loadPopularMovies) { movies ->
+           movies?.let { list ->
+               popularMoviesLiveData.appendList(list)
+           }
+       }*/

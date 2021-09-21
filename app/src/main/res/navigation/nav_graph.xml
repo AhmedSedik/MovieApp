@@ -23,5 +23,20 @@
             android:name="movieListTypeArgs"
             app:argType="com.example.myapplication.util.MovieListType" />
     </fragment>
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.example.myapplication.ui.account.AccountFragment"
+        android:label="AccountFragment"
+        tools:layout="@layout/fragment_account"/>
+    <fragment
+        android:id="@+id/discoverFragment"
+        android:name="com.example.myapplication.ui.discover.DiscoverFragment"
+        android:label="DiscoverFragment"
+        tools:layout="@layout/fragment_discover"/>
+    <fragment
+        android:id="@+id/favouriteFragment"
+        android:name="com.example.myapplication.ui.favourite.FavouriteFragment"
+        android:label="FavouriteFragment"
+        tools:layout="@layout/fragment_favourite"/>
 
 </navigation>

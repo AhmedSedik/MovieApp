@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/content_margin"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="48dp"
         android:layout_marginRight="@dimen/content_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

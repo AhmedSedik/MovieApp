@@ -11,34 +11,67 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="14dp"
-    android:clickable="true">
+    android:clickable="true"
+    android:background="@color/app_background">
 
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="108dp"
+        android:layout_width="0dp"
         android:layout_height="162dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintDimensionRatio="w,2:3"
+        android:background="@drawable/bg_poster_corner"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:bind_poster_path="@{movie.posterPath}"
-        tools:src="@tools:sample/avatars[12]"/>
+        tools:src="@drawable/image_holder"/>
+
+    <TextView
+        android:id="@+id/tv_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/bg_rating_over_poster"
+        android:padding="2dp"
+        android:textSize="12sp"
+        android:textAlignment="center"
+        app:bind_rating_text="@{movie.voteAverage}"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintBottom_toBottomOf="@+id/image"
+        app:layout_constraintEnd_toEndOf="@+id/image"
+        app:layout_constraintTop_toTopOf="@+id/image"
+        app:layout_constraintVertical_bias="0.043"
+        style="@style/TextAppearance.AppCompat.Button"
+        tools:text="7.7" />
 
     <TextView
         android:id="@+id/titleText"
         android:layout_width="0dp"
-        style="@style/CardView"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:alpha=".8"
         android:ellipsize="end"
         android:lines="2"
-        android:paddingTop="5dp"
+        android:ems="3"
+        android:paddingBottom="4dp"
         android:textSize="12sp"
         android:text="@{movie.title}"
-        app:layout_constraintLeft_toLeftOf="@id/image"
-        app:layout_constraintRight_toRightOf="@id/image"
+        app:layout_constraintEnd_toStartOf="@+id/iv_three_dot"
+        app:layout_constraintStart_toStartOf="@+id/image"
         app:layout_constraintTop_toBottomOf="@id/image"
-        tools:text="Title"/>
+        tools:text="Spider Man: Far from home"/>
+
+        <ImageView
+            android:id="@+id/iv_three_dot"
+            android:layout_width="14dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:tint="@color/bluegray_10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image"
+            app:srcCompat="@drawable/ic_more" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

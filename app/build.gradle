@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'kotlin-parcelize'
 
 Properties properties = new Properties()
 properties.load(project.rootProject.file("local.properties").newDataInputStream())
@@ -19,7 +20,18 @@ android {
         versionName "1.0"
         buildConfigField("String", "API_KEY", properties.getProperty("api_key"))
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [
+                        "room.schemaLocation":"$projectDir/schemas".toString(),
+                        "room.incremental":"true",
+                        "room.expandProjection":"true"]
+            }
+        }
+
     }
+    
 
     buildTypes {
         release {
@@ -97,8 +109,19 @@ dependencies {
     // Retrofit with Moshi Converter
     implementation "com.squareup.retrofit2:converter-moshi:$rootProject.retrofitVersion"
 
-    /*// Paging 3
-    implementation "androidx.paging:paging-runtime:$rootProject.pagingVersion"*/
+    // Paging 3
+    implementation "androidx.paging:paging-runtime-ktx:$rootProject.pagingVersion"
+
+    def room_version = "2.3.0"
+
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    // To use Kotlin annotation processing tool (kapt)
+    kapt("androidx.room:room-compiler:$room_version")
+
+    // Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
 
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerViewVersion"

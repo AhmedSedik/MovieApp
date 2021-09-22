@@ -29,6 +29,8 @@ class HomeViewModel @Inject constructor(
 
     private val _viewAllEvent = MutableLiveData<Event<MovieListType>>()
 
+    val highlightedMovie = MediatorLiveData<Movie>()
+
     val viewAllEvent: LiveData<Event<MovieListType>>
     get() = _viewAllEvent
 
@@ -46,7 +48,11 @@ class HomeViewModel @Inject constructor(
             popularMoviesMediatorLiveData.value = it
         }
 
-
+        highlightedMovie.addSource(_popularMoviesLiveData) {
+            if (highlightedMovie.value == null) {
+                highlightedMovie.value = it?.first()
+            }
+        }
     }
 
 
@@ -59,6 +65,10 @@ class HomeViewModel @Inject constructor(
         _viewAllEvent.value = Event(movieListType)
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        Timber.d("ViewModel Cleared")
+    }
 }
 
 /*_popularMoviesLiveData = page.switchMap {

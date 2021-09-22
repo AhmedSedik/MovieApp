@@ -3,6 +3,7 @@ package com.example.myapplication.ui.home.binding
 import android.opengl.Visibility
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
@@ -49,3 +50,4 @@ fun View.bindProgressVisibility(items: List<Any>?) {
         this.visibility = View.GONE
     }
 }
+

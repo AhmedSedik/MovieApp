@@ -10,6 +10,7 @@ import androidx.viewbinding.ViewBinding
 import com.example.myapplication.data.GoToMovie
 import com.example.myapplication.data.InfiniteContentScrollListener
 import com.example.myapplication.data.model.entity.Movie
+import com.example.myapplication.databinding.ItemSliderMovieBinding
 import com.example.myapplication.databinding.ListItemMovieBinding
 import com.example.myapplication.databinding.ListItemMovieGridBinding
 import java.lang.Exception
@@ -18,7 +19,7 @@ import java.lang.Exception
  * Created by Ahmad Sedeek on 9/19/2021.
  */
 
-class MovieListAdapter ()
+class MovieListAdapter
     : ListAdapter<(Movie), MovieListAdapter.MovieViewHolder>(MovieDiffCallback) {
 
     private var isGrid: Boolean = false
@@ -36,11 +37,16 @@ class MovieListAdapter ()
                 is ListItemMovieGridBinding -> {
                     binding.movie = movie
                     binding.executePendingBindings()
+                } is ItemSliderMovieBinding ->{
+                binding.movie = movie
+                binding.executePendingBindings()
                 }
                 else -> throw Exception("Invalid Binding")
             }
 
         }
+
+
 
     }
 
@@ -48,6 +54,7 @@ class MovieListAdapter ()
         val newList: MutableList<Movie> = arrayListOf()
         if (list != null) newList.addAll(list)
         super.submitList(newList)
+        //infiniteContentScrollListener.itemsLoaded()
     }
 
     /**
@@ -78,11 +85,15 @@ class MovieListAdapter ()
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bindView(getItem(position))
+        getItem(position).let {
+            holder.bindView(it)
+        }
+
     }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
         if(recyclerView.layoutManager is GridLayoutManager) isGrid= true
     }
+
 }

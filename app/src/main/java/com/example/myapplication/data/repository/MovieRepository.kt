@@ -13,7 +13,7 @@ import javax.inject.Singleton
 /**
  * Created by Ahmad Sedeek on 9/19/2021.
  */
-
+@Singleton
 class MovieRepository @Inject constructor(private val movieService: MovieServiceHelper) :
     BaseRepository() {
 

@@ -1,6 +1,9 @@
 package com.example.myapplication.di
 
+import android.app.Application
+import android.content.Context
 import androidx.lifecycle.ViewModel
+import com.example.myapplication.MainApplication
 import com.example.myapplication.data.remote.MovieService
 import com.example.myapplication.data.remote.MovieServiceHelper
 import com.example.myapplication.data.remote.MovieServiceHelperImpl
@@ -29,6 +32,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+
     @Singleton
     @Provides
     fun provideBaseUrl() = BASE_URL

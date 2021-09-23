@@ -1,8 +1,11 @@
 package com.example.myapplication.ui.view_all
 
 import androidx.lifecycle.*
+import com.example.myapplication.data.GoToMovie
+import com.example.myapplication.data.model.Event
 import com.example.myapplication.data.model.entity.Movie
 import com.example.myapplication.data.repository.MovieRepository
+import com.example.myapplication.extension.appendList
 import com.example.myapplication.util.MovieListType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -17,21 +20,20 @@ import javax.inject.Inject
 class ViewAllViewModel @Inject constructor(
     private val movieRepository: MovieRepository,
     movieListType: MovieListType
-) : ViewModel() {
+) : ViewModel() ,GoToMovie{
 
     private val page = MutableLiveData<Int>().apply { value = 1 }
 
-    private val _moviesListLiveData: LiveData<List<Movie>>
-    val moviesListMediatorLiveData = MediatorLiveData<List<Movie>>()
-
+    private val _moviesList: LiveData<List<Movie>>
+    val movieList = MediatorLiveData<MutableList<Movie>>()
 
     init {
         Timber.d("ShowALlViewModel")
-        _moviesListLiveData = when (movieListType) {
+        _moviesList = when (movieListType) {
             MovieListType.POPULAR -> {
                 page.switchMap { page ->
                     liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
-                        emitSource(movieRepository.getPopularMovies(page) {})
+                        emitSource(movieRepository.getMoviesList(page) {})
                     }
                 }
             }//TODO:
@@ -42,12 +44,22 @@ class ViewAllViewModel @Inject constructor(
             }
         }
 
-        moviesListMediatorLiveData.addSource(_moviesListLiveData) { list ->
-            moviesListMediatorLiveData.value = list
+        movieList.addSource(_moviesList) {
+            it?.let {  movieList->
+                this.movieList.appendList(movieList)
+
+            }
 
         }
 
 
     }
+
+    fun loadMoreMovies() {
+        page.value = page.value?.plus(1)
+    }
+
+    override val goToMovieDetailsEvent: MutableLiveData<Event<Movie>>
+        get() = TODO("Not yet implemented")
 
 }

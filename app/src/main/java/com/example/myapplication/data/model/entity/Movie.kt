@@ -17,8 +17,8 @@ data class Movie(
     val id: Int?,
     @Json(name = "title")
     val title: String?,
-    @Json(name = "genre_ids")
-    val genreIds: List<Int>,
+    /*@Json(name = "genre_ids")
+    val genreIds: List<Int?>*/
     @Json(name = "backdrop_path")
     val backDropPath: String?,
     @Json(name = "poster_path")

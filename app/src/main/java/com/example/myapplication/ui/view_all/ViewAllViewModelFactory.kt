@@ -1,5 +1,8 @@
 package com.example.myapplication.ui.view_all
 
+import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
+
 /**
  * Created by Ahmad Sedeek on 9/20/2021.
  *Viewmodel Factory to pass @param{movieListType}
@@ -20,3 +23,11 @@ class ShowAllViewModelFactory @Inject constructor(private val movieListType: Mov
     }
 
 }*/
+
+
+/*
+@BindingAdapter("adapter")
+fun bindRecyclerViewAdapter(view: RecyclerView, adapter: RecyclerView.Adapter<*>) {
+    view.adapter = adapter
+}
+*/

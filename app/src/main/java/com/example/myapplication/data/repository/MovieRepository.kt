@@ -3,6 +3,7 @@ package com.example.myapplication.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
+import com.example.myapplication.data.local.MovieDao
 import com.example.myapplication.data.model.entity.Movie
 import com.example.myapplication.data.remote.MovieServiceHelper
 
@@ -28,6 +29,7 @@ class MovieRepository @Inject constructor(private val movieService: MovieService
             errorText
         )
     }
+
 
     suspend fun getMoviesList(page: Int, errorText: (String) -> Unit)
             : MutableLiveData<List<Movie>> {

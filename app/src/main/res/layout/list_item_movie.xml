@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
+            name="gotoInterface"
+            type="com.example.myapplication.data.GoToMovie" />
+        <variable
             name="movie"
             type="com.example.myapplication.data.model.entity.Movie" />
     </data>

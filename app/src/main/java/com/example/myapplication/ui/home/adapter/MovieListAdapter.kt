@@ -19,33 +19,33 @@ import java.lang.Exception
  * Created by Ahmad Sedeek on 9/19/2021.
  */
 
-class MovieListAdapter
-    : ListAdapter<(Movie), MovieListAdapter.MovieViewHolder>(MovieDiffCallback) {
+class MovieListAdapter(
+    private val goToMovie: GoToMovie,
+    private val infiniteContentScrollListener: InfiniteContentScrollListener
+) : ListAdapter<(Movie), MovieListAdapter.MovieViewHolder>(MovieDiffCallback) {
 
     private var isGrid: Boolean = false
 
     class MovieViewHolder(private val binding: ViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bindView(movie: Movie) {
+        fun bindView(goToMovie: GoToMovie,movie: Movie) {
 
             when (binding) {
                 is ListItemMovieBinding -> {
+                    binding.gotoInterface = goToMovie
                     binding.movie = movie
                     binding.executePendingBindings()
                 }
                 is ListItemMovieGridBinding -> {
+                    binding.gotoInterface = goToMovie
                     binding.movie = movie
                     binding.executePendingBindings()
-                } is ItemSliderMovieBinding ->{
-                binding.movie = movie
-                binding.executePendingBindings()
                 }
                 else -> throw Exception("Invalid Binding")
             }
 
         }
-
 
 
     }
@@ -54,7 +54,7 @@ class MovieListAdapter
         val newList: MutableList<Movie> = arrayListOf()
         if (list != null) newList.addAll(list)
         super.submitList(newList)
-        //infiniteContentScrollListener.itemsLoaded()
+         infiniteContentScrollListener.itemsLoaded()
     }
 
     /**
@@ -75,25 +75,25 @@ class MovieListAdapter
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding: ViewBinding = if (isGrid){
+        val binding: ViewBinding = if (isGrid) {
             ListItemMovieGridBinding.inflate(layoutInflater, parent, false)
 
-        }else {
-                ListItemMovieBinding.inflate(layoutInflater,parent,false)
+        } else {
+            ListItemMovieBinding.inflate(layoutInflater, parent, false)
         }
         return MovieViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        getItem(position).let {
-            holder.bindView(it)
+        getItem(position).let { movie->
+            holder.bindView(goToMovie,movie)
         }
 
     }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
-        if(recyclerView.layoutManager is GridLayoutManager) isGrid= true
+        if (recyclerView.layoutManager is GridLayoutManager) isGrid = true
     }
 
 }

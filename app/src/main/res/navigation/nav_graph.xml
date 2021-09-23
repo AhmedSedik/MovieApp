@@ -18,7 +18,7 @@
         android:id="@+id/viewAllFragment"
         android:name="com.example.myapplication.ui.view_all.ViewAllFragment"
         android:label="{movieListTypeArgs}"
-        tools:layout="@layout/fragment_showall">
+        tools:layout="@layout/fragment_viewall">
         <argument
             android:name="movieListTypeArgs"
             app:argType="com.example.myapplication.util.MovieListType" />

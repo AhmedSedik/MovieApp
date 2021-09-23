@@ -8,6 +8,6 @@ data class MovieResponse(
     @Json(name = "page")
     override var page: Int,
     @Json(name = "results")
-    override var results: List<Movie>
+    override val results: List<Movie>
 
 ) : BaseListResponse<Movie>

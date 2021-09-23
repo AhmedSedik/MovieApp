@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.example.myapplication.databinding.FragmentShowallBinding
+import com.example.myapplication.databinding.FragmentViewallBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -19,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ViewAllFragment : Fragment() {
 
-    private lateinit var binding:FragmentShowallBinding
+    private lateinit var binding:FragmentViewallBinding
     private val args: ViewAllFragmentArgs by navArgs()
 
     private val viewAllViewModel: ViewAllViewModel by viewModels()
@@ -28,7 +28,7 @@ class ViewAllFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentShowallBinding.inflate(
+        binding = FragmentViewallBinding.inflate(
             inflater,
             container, false
 

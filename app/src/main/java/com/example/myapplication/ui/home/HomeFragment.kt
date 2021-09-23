@@ -34,7 +34,6 @@ class HomeFragment : Fragment() {
 
             lifecycleOwner = this@HomeFragment.viewLifecycleOwner
 
-
         }
 
 

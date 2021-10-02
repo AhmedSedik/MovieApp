@@ -1,5 +1,6 @@
 package com.example.myapplication.extension
 
+/*
 import com.example.myapplication.data.model.response.APIResponse
 
 
@@ -17,3 +18,4 @@ fun <T> APIResponse<T>.onException(onResult: APIResponse.Exception<*>.() -> Unit
     if (this is APIResponse.Exception<*>) onResult(this)
     return this
 }
+*/

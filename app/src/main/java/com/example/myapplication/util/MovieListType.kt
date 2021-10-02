@@ -16,7 +16,11 @@ enum class MovieListType {
     UPCOMING {
         override fun toString() = "Upcoming"
     },
+    TOPRATED{
+        override fun toString() = "TopRated"
+    },
     IN_THEATERS {
         override fun toString() = "In Theaters"
-    }
+    },
+    SEARCH
 }

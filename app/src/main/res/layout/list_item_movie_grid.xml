@@ -4,11 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
-            name="gotoInterface"
-            type="com.example.myapplication.data.GoToMovie" />
-        <variable
             name="movie"
-            type="com.example.myapplication.data.model.entity.Movie" />
+            type="com.example.myapplication.data.model.domain.MovieDomain" />
     </data>
 
 
@@ -16,6 +13,7 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+
     app:cardElevation="2dp"
     app:cardCornerRadius="6dp"
     app:cardUseCompatPadding="true">
@@ -24,6 +22,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
         android:paddingRight="8dp">
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -49,7 +48,7 @@
             android:padding="2dp"
             android:textSize="12sp"
             android:textAlignment="center"
-            app:bind_rating_text="@{movie.voteAverage}"
+            android:text="@{String.valueOf(movie.voteAverage)}"
             android:textColor="@android:color/background_light"
             app:layout_constraintBottom_toBottomOf="@+id/image"
             app:layout_constraintEnd_toEndOf="@+id/image"

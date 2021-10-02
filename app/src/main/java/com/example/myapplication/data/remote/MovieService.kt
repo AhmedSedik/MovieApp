@@ -1,9 +1,8 @@
 package com.example.myapplication.data.remote
 
 import com.example.myapplication.util.Constants.API_VERSION
-import com.example.myapplication.BuildConfig.API_KEY
+
 import com.example.myapplication.data.model.response.MovieResponse
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -14,14 +13,24 @@ import retrofit2.http.Query
 interface MovieService {
 
     @GET("$API_VERSION/movie/popular")
-    fun getPopularMovies(
+    suspend fun getPopularMovies(
+        @Query("page") page: Int?
+    ): Response<MovieResponse>
+
+    @GET("$API_VERSION/movie/top_rated")
+    suspend fun getTopRatedMovie(
         @Query("page") page: Int
-    ): Call<MovieResponse>
+    ): Response<MovieResponse>
+
+    @GET("$API_VERSION/movie/now_playing")
+    suspend fun getUpcomingMovies(
+        @Query("page") page: Int?
+    ): Response<MovieResponse>
 
 
     @GET("$API_VERSION/discover/movie")
-    fun getMoviesList(
-        @Query("page") page: Int
-    ): Call<MovieResponse>
+    suspend fun getMoviesList(
+        @Query("page") page: Int?
+    ): Response<MovieResponse>
 
 }

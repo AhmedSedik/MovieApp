@@ -1,5 +1,6 @@
 package com.example.myapplication.data.model.response
 
+/*
 import retrofit2.Response
 
 sealed class APIResponse<out T> {
@@ -16,3 +17,4 @@ sealed class APIResponse<out T> {
         val message: String? = throwable.localizedMessage
     }
 }
+*/

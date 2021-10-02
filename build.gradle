@@ -28,7 +28,7 @@ buildscript {
         picaso_version = '2.71828'
         roomVersion = '2.2.5'
         gsonVersion = '2.8.2'
-        okhttpLoggingVersion = '4.7.2'
+        okhttpLoggingVersion = '5.0.0-alpha.2'
         timberVersion = '4.7.1'
         versionMoshi = "1.9.3"
         recyclerViewVersion = "1.2.1"

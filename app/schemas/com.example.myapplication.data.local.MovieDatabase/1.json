@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "0a637fd75c3af8dac75e8b55dc8df85e",
+    "identityHash": "9f9bd025e72020cfdda6fec7f6821fff",
     "entities": [
       {
         "tableName": "movies",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER, `title` TEXT, `backDropPath` TEXT, `posterPath` TEXT, `voteAverage` REAL, `voteCount` INTEGER, `releaseDate` TEXT, `originalLanguage` TEXT, `overview` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER, `title` TEXT, `poster_path` TEXT, `vote_average` REAL, `release_date` TEXT, `overview` TEXT, `api_page_index` INTEGER, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -21,38 +21,20 @@
             "notNull": false
           },
           {
-            "fieldPath": "backDropPath",
-            "columnName": "backDropPath",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
             "fieldPath": "posterPath",
-            "columnName": "posterPath",
+            "columnName": "poster_path",
             "affinity": "TEXT",
             "notNull": false
           },
           {
             "fieldPath": "voteAverage",
-            "columnName": "voteAverage",
+            "columnName": "vote_average",
             "affinity": "REAL",
             "notNull": false
           },
           {
-            "fieldPath": "voteCount",
-            "columnName": "voteCount",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
             "fieldPath": "releaseDate",
-            "columnName": "releaseDate",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "originalLanguage",
-            "columnName": "originalLanguage",
+            "columnName": "release_date",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -60,6 +42,12 @@
             "fieldPath": "overview",
             "columnName": "overview",
             "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "apiPageIndex",
+            "columnName": "api_page_index",
+            "affinity": "INTEGER",
             "notNull": false
           }
         ],
@@ -71,12 +59,204 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "remote_keys_popular",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`popularId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `movieId` INTEGER NOT NULL, `page` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "popularId",
+            "columnName": "popularId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "movieId",
+            "columnName": "movieId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "page",
+            "columnName": "page",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "popularId"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "remote_keys_top",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`topRatedId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `movieId` INTEGER NOT NULL, `page` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "topRatedId",
+            "columnName": "topRatedId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "movieId",
+            "columnName": "movieId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "page",
+            "columnName": "page",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "topRatedId"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "remote_key_upcoming",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`upcomingId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `movieId` INTEGER NOT NULL, `page` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "upcomingId",
+            "columnName": "upcomingId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "movieId",
+            "columnName": "movieId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "page",
+            "columnName": "page",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "upcomingId"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "popular_pos",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`popularId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `movieId` INTEGER NOT NULL, `position` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "popularId",
+            "columnName": "popularId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "movieId",
+            "columnName": "movieId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "position",
+            "columnName": "position",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "popularId"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "top_rated_pos",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`topRatedId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `movieId` INTEGER NOT NULL, `position` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "topRatedId",
+            "columnName": "topRatedId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "movieId",
+            "columnName": "movieId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "position",
+            "columnName": "position",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "topRatedId"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "upcoming_pos",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`upcomingId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `movieId` INTEGER NOT NULL, `position` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "upcomingId",
+            "columnName": "upcomingId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "movieId",
+            "columnName": "movieId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "position",
+            "columnName": "position",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "upcomingId"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0a637fd75c3af8dac75e8b55dc8df85e')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9f9bd025e72020cfdda6fec7f6821fff')"
     ]
   }
 }

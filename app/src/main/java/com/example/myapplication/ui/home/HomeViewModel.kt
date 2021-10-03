@@ -7,8 +7,10 @@ import com.example.myapplication.data.GoToMovie
 import com.example.myapplication.data.model.Event
 import com.example.myapplication.data.model.domain.MovieDomain
 import com.example.myapplication.data.model.entity.Movie
+import com.example.myapplication.data.remote.MovieDto
 import com.example.myapplication.data.repository.MovieRepository
 import com.example.myapplication.extension.appendList
+import com.example.myapplication.extension.liveDataBlockScope
 import com.example.myapplication.util.MovieListType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -22,37 +24,21 @@ import javax.inject.Inject
 /**
  * Created by Ahmad Sedeek on 9/19/2021.
  */
-private val DEFAULT_QUERY_TYPE = MovieListType.POPULAR
+
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val movieRepository: MovieRepository,movieListType: MovieListType
-) : ViewModel() {
-
-    private val mutableSearchQueryFlow: MutableStateFlow<MovieListType>
-        get() {
-            TODO()
-        }
-    private val queryType = MutableLiveData(DEFAULT_QUERY_TYPE)
-
-
-   /* val popularMoviesFlow: Flow<PagingData<MovieDomain>> =
-        movieRepository.popularMoviesFlow.cachedIn(viewModelScope)*/
+    private val movieRepository: MovieRepository)
+    : ViewModel() ,GoToMovie{
 
 
 
-    val popularMovieList = MediatorLiveData<MutableList<Movie>>()
+    private val loadedPopularMovieList: LiveData<List<MovieDto>>
+    private val popularPage = MutableLiveData<Int>().apply { value = 1 }
 
-    fun getMovies(movieListType: MovieListType): Flow<PagingData<MovieDomain>> {
-        return movieRepository.popularMoviesFlow(movieListType).cachedIn(viewModelScope)
-
-
-    }
+    val popularMovieList = MediatorLiveData<MutableList<MovieDto>>()
 
 
-    fun navigateCollection(navigate: (query: MovieListType) -> Unit) {
-        navigate.invoke(requireNotNull(queryType.value))
-    }
     private val _viewAllEvent = MutableLiveData<Event<MovieListType>>()
 
 
@@ -62,6 +48,20 @@ class HomeViewModel @Inject constructor(
 
     init {
         Timber.d("view Model initiated")
+
+        loadedPopularMovieList = popularPage.switchMap {
+            liveDataBlockScope {
+                movieRepository.loadPopularList(it){}
+            }
+
+
+        }
+
+        popularMovieList.addSource(loadedPopularMovieList){
+            it?.let { list ->
+                popularMovieList.appendList(list)
+            }
+        }
 
     }
 
@@ -74,6 +74,13 @@ class HomeViewModel @Inject constructor(
         super.onCleared()
         Timber.d("ViewModel Cleared")
     }
+
+    fun loadMorePopular() {
+        popularPage.value = popularPage.value?.plus(1)
+    }
+
+    override val goToMovieDetailsEvent: MutableLiveData<Event<MovieDto>>
+        get() = TODO("Not yet implemented")
 
 }
 

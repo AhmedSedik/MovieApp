@@ -30,7 +30,7 @@
         <entry key="..\:/Users/ahmed/StudioProjects/MovieApp/app/src/main/res/layout/item_load_state.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ahmed/StudioProjects/MovieApp/app/src/main/res/layout/item_popular_movie.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ahmed/StudioProjects/MovieApp/app/src/main/res/layout/item_slider_movie.xml" value="0.2598958333333333" />
-        <entry key="..\:/Users/ahmed/StudioProjects/MovieApp/app/src/main/res/layout/list_item_movie.xml" value="0.9" />
+        <entry key="..\:/Users/ahmed/StudioProjects/MovieApp/app/src/main/res/layout/list_item_movie.xml" value="0.45774647887323944" />
         <entry key="..\:/Users/ahmed/StudioProjects/MovieApp/app/src/main/res/layout/list_item_movie_grid.xml" value="0.25" />
         <entry key="..\:/Users/ahmed/StudioProjects/MovieApp/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/ahmed/StudioProjects/MovieApp/app/src/main/res/menu/buttom_navigation_menu.xml" value="0.36666666666666664" />
@@ -40,7 +40,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

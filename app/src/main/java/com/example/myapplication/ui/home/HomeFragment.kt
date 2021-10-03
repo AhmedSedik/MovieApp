@@ -26,7 +26,7 @@ class HomeFragment : Fragment() {
     @Inject lateinit var movieListType: MovieListType
     private val homeViewModel: HomeViewModel by viewModels()
 
-    private val pagingAdapter = MovieListAdapter()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,11 +37,16 @@ class HomeFragment : Fragment() {
             inflater,
             container,
             false
-        )
+        ).apply {
+            viewModel = homeViewModel
+            lifecycleOwner = this@HomeFragment.viewLifecycleOwner
+        }
 
-        binding.lifecycleOwner = this@HomeFragment.viewLifecycleOwner
-        binding.viewModel = homeViewModel
 
+
+        homeViewModel.viewAllEvent.observe(viewLifecycleOwner, EventObserver { type ->
+            navigateToViewAll(type)
+        })
 
         movieListType = MovieListType.POPULAR
 
@@ -49,37 +54,13 @@ class HomeFragment : Fragment() {
         return binding.root
 
     }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        setupView()
-        observeViewModel()
-
-
-
-        homeViewModel.viewAllEvent.observe(viewLifecycleOwner, EventObserver { type ->
-            navigateToViewAll(type)
-        })
-    }
-
-    private fun observeViewModel() {
-        lifecycleScope.launch {
-            homeViewModel.getMovies(movieListType).distinctUntilChanged().collectLatest {
-                pagingAdapter.submitData(it)
-            }
-        }
-
-    }
-
     private fun navigateToViewAll(type: MovieListType) {
         val navigateAction = HomeFragmentDirections.actionHomeFragmentToShowAllFragment(type)
         findNavController().navigate(navigateAction)
     }
 
 
-    private fun setupView() {
+ /*   private fun setupView() {
         binding.popularRecyclerView.apply {
             val horizontalLayoutManager =
                 LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
@@ -91,7 +72,7 @@ class HomeFragment : Fragment() {
                 footer = MoviesLoadStateAdapter(retryListener = { pagingAdapter.retry() })
             )
         }
-    }
+    }*/
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_menu, menu)

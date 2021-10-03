@@ -32,10 +32,10 @@ class MovieListAdapter() :
         fun bindView(movie: MovieDomain?) {
 
             when (binding) {
-                is ListItemMovieBinding -> {
+                /*is ListItemMovieBinding -> {
                     binding.movie = movie
                     binding.executePendingBindings()
-                }
+                }*/
                 is ListItemMovieGridBinding -> {
                     binding.movie = movie
                     binding.executePendingBindings()

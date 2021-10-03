@@ -1,21 +1,22 @@
-/*
+
+
 package com.example.myapplication.data.repository
 
 import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.data.model.response.BaseListResponse
+import com.example.myapplication.data.model.response.MovieResponse
 import com.example.myapplication.extension.request
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import com.example.myapplication.extension.onFailure
 import com.example.myapplication.extension.onException
 import com.example.myapplication.extension.onSuccess
-
 import retrofit2.Call
 
-*/
 /**
  * Created by Ahmad Sedeek on 9/19/2021.
- *//*
+ */
+
 
 abstract class BaseRepository {
 
@@ -35,4 +36,4 @@ abstract class BaseRepository {
             }
             result.apply { postValue(null) }
         }
-}*/
+}

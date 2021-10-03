@@ -5,7 +5,11 @@
     <data>
         <variable
             name="movie"
-            type="com.example.myapplication.data.model.domain.MovieDomain" />
+            type="com.example.myapplication.data.remote.MovieDto" />
+
+        <variable
+            name="goToInterface"
+            type="com.example.myapplication.data.GoToMovie" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout

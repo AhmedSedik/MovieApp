@@ -6,6 +6,10 @@
         <variable
             name="movie"
             type="com.example.myapplication.data.model.domain.MovieDomain" />
+
+        <variable
+            name="goToInterface"
+            type="com.example.myapplication.data.GoToMovie" />
     </data>
 
 

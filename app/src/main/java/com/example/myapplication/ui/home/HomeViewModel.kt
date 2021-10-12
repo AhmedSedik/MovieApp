@@ -1,23 +1,14 @@
 package com.example.myapplication.ui.home
 
 import androidx.lifecycle.*
-import androidx.paging.PagingData
-import androidx.paging.cachedIn
 import com.example.myapplication.data.GoToMovie
 import com.example.myapplication.data.model.Event
-import com.example.myapplication.data.model.domain.MovieDomain
-import com.example.myapplication.data.model.entity.Movie
-import com.example.myapplication.data.remote.MovieDto
+import com.example.myapplication.data.model.moviesusecase.GetMoviesUseCase
+import com.example.myapplication.data.remote.movies.MovieDto
 import com.example.myapplication.data.repository.MovieRepository
-import com.example.myapplication.extension.appendList
-import com.example.myapplication.extension.liveDataBlockScope
 import com.example.myapplication.util.MovieListType
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.conflate
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -28,15 +19,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val movieRepository: MovieRepository)
+    private val movieRepository: MovieRepository,
+    private val getMoviesUseCase: GetMoviesUseCase)
     : ViewModel() ,GoToMovie{
 
 
-
-    private val loadedPopularMovieList: LiveData<List<MovieDto>>
+    //private val _loadingStatus = MutableLiveData<LoadingStatus>()
+   // private val loadedPopularMovieList: LiveData<List<MovieDto>>
     private val popularPage = MutableLiveData<Int>().apply { value = 1 }
 
-    val popularMovieList = MediatorLiveData<MutableList<MovieDto>>()
+   // val popularMovieList = MediatorLiveData<MutableList<MovieDto>>()
 
 
     private val _viewAllEvent = MutableLiveData<Event<MovieListType>>()
@@ -46,14 +38,20 @@ class HomeViewModel @Inject constructor(
     get() = _viewAllEvent
 
 
+    val movies=  getMoviesUseCase.execute(Unit).conflate(). asLiveData()
     init {
         Timber.d("view Model initiated")
 
-        loadedPopularMovieList = popularPage.switchMap {
-            liveDataBlockScope {
-                movieRepository.loadPopularList(it){}
+       /* loadedPopularMovieList = popularPage.switchMap { page->
+            liveData(context = viewModelScope.coroutineContext + IO){
+                emitSource(movieRepository.fetchPopularFromNetwork(page))
             }
 
+        }*/
+       /* loadedPopularMovieList = popularPage.switchMap { page->
+            liveDataBlockScope {
+                movieRepository.loadPopularList(page) { }
+            }
 
         }
 
@@ -61,9 +59,10 @@ class HomeViewModel @Inject constructor(
             it?.let { list ->
                 popularMovieList.appendList(list)
             }
-        }
+        }*/
 
     }
+
 
     fun viewAll(movieListType: MovieListType) {
         Timber.d("ViewAll Clicked")

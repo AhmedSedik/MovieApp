@@ -1,11 +1,8 @@
 package com.example.myapplication.data
 
-import android.media.Image
 import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.data.model.Event
-import com.example.myapplication.data.model.domain.MovieDomain
-import com.example.myapplication.data.model.entity.Movie
-import com.example.myapplication.data.remote.MovieDto
+import com.example.myapplication.data.remote.movies.MovieDto
 
 
 interface GoToMovie {

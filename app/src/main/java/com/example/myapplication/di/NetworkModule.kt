@@ -81,7 +81,7 @@ object NetworkModule {
         .build()
 
 
-    @Singleton
+
     @Provides
     fun provideMoshiConverterFactory(moshi: Moshi): Converter.Factory =
         MoshiConverterFactory.create(moshi)

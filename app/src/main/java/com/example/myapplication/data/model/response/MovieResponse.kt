@@ -1,6 +1,6 @@
 package com.example.myapplication.data.model.response
 
-import com.example.myapplication.data.remote.MovieDto
+import com.example.myapplication.data.remote.movies.MovieDto
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

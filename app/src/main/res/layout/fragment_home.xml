@@ -16,13 +16,7 @@
             name="pager"
             type="com.example.myapplication.data.mediator.PageKeyedRemoteMediator" />
 
-        <variable
-            name="movie"
-            type="com.example.myapplication.data.remote.MovieDto" />
 
-        <variable
-            name="goToInterface"
-            type="com.example.myapplication.data.GoToMovie" />
     </data>
 
 
@@ -57,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="23dp"
                 android:clickable="true"
-                android:onClick="@{() -> viewModel.viewAll(MovieListType.TOPRATED)}"
+                android:onClick="@{() -> viewModel.viewAll(MovieListType.POPULAR)}"
                 android:fontFamily="@font/roboto_mono"
                 android:text="@string/view_all"
                 android:textSize="14sp"
@@ -70,9 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:orientation="horizontal"
-                app:bind_load_more="@{viewModel::loadMorePopular}"
-                app:bind_movie_list="@{viewModel.popularMovieList}"
-                app:bind_view_model="@{viewModel}"
+
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -85,7 +77,7 @@
                 android:layout_width="@dimen/progress_bar"
                 android:layout_height="@dimen/progress_bar"
                 android:visibility="gone"
-                app:bind_progress_visibility="@{viewModel.popularMovieList}"
+
                 app:layout_constraintBottom_toBottomOf="@+id/popular_recycler_view"
                 app:layout_constraintEnd_toEndOf="@+id/popular_recycler_view"
                 app:layout_constraintHorizontal_bias="0.5"

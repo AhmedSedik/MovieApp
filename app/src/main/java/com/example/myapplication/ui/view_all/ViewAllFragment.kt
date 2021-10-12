@@ -67,7 +67,7 @@ class ViewAllFragment : Fragment() {
 
     private fun setupView() {
         binding.showAllRecyclerview.apply {
-            val gridLayoutManager = GridLayoutManager(requireContext(),3)
+            val gridLayoutManager = GridLayoutManager(requireContext(),2)
             layoutManager = gridLayoutManager
             adapter = pagingAdapter.withLoadStateHeaderAndFooter(
                 header = MoviesLoadStateAdapter(retryListener = { pagingAdapter.retry() }),

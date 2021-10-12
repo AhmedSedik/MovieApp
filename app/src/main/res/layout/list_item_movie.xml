@@ -5,18 +5,22 @@
     <data>
         <variable
             name="movie"
-            type="com.example.myapplication.data.remote.MovieDto" />
+            type="com.example.myapplication.data.model.domain.MovieDomain" />
 
         <variable
             name="goToInterface"
             type="com.example.myapplication.data.GoToMovie" />
+        <variable
+            name="clickListener"
+            type="com.example.myapplication.ui.MovieClickListener" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:clickable="true"
-    android:background="@color/app_background">
+    android:background="@color/app_background"
+    android:onClick="@{()->clickListener.onClick(movie)}">
 
 
     <ImageView

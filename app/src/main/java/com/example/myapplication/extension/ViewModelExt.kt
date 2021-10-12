@@ -7,5 +7,6 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 
 fun <T> ViewModel.liveDataBlockScope(block: suspend () -> LiveData<T>): LiveData<T> {
-    return liveData(viewModelScope.coroutineContext + Dispatchers.IO) { emitSource(block()) }
+    return liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
+        emitSource(block()) }
 }

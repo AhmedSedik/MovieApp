@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                    android:id="@+id/youTubePlayerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_collapseMode="parallax" />
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                    app:layout_collapseMode="pin"
+                    app:navigationIcon="@drawable/ic_arrow_back" />
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_movie_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin16dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:maxLines="1"
+                    android:textColor="@color/white"
+
+                    android:textSize="@dimen/textSize12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/dummy_movie_name" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_releaseDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/montserrat"
+                    android:textSize="@dimen/textSize10sp"
+                    app:layout_constraintStart_toStartOf="@+id/tv_movie_title"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_movie_title"
+                    tools:text="Oct 15, 2020" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/colorDivider"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_releaseDate"
+                    app:layout_constraintStart_toEndOf="@+id/tv_releaseDate"
+                    app:layout_constraintTop_toTopOf="@+id/tv_releaseDate" />
+
+                <TextView
+                    android:id="@+id/tv_language"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/montserrat"
+                    android:textAllCaps="true"
+
+                    android:textSize="@dimen/textSize10sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_releaseDate"
+                    app:layout_constraintStart_toEndOf="@+id/view"
+                    app:layout_constraintTop_toTopOf="@+id/tv_releaseDate"
+                    app:layout_constraintVertical_bias="1.0"
+                    tools:text="EN" />
+
+
+                <ImageView
+                    android:id="@+id/iv_runtime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/runtime"
+                    app:layout_constraintStart_toStartOf="@+id/tv_releaseDate"
+                    app:layout_constraintTop_toBottomOf="@+id/genre"
+                    app:srcCompat="@drawable/ic_access_time" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_runtime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_runtime"
+                    app:layout_constraintStart_toEndOf="@+id/iv_runtime"
+                    app:layout_constraintTop_toTopOf="@+id/iv_runtime"
+                    tools:text="2h 58 mins" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:drawableStart="@drawable/ic_baseline_favorite_24"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/montserrat_bold"
+
+                    android:textColor="?colorOnBackground"
+                    android:textSize="@dimen/textSize12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_movie_title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_movie_title"
+                    tools:text="9.8" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/genre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintStart_toStartOf="@+id/tv_releaseDate"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_releaseDate"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_genre"
+                    tools:text="TextView" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_votes"
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:textSize="@dimen/textSize10sp"
+                    app:layout_constraintEnd_toEndOf="@+id/text_rating"
+
+                    app:layout_constraintTop_toBottomOf="@+id/text_rating"
+                    tools:text="1.2k Votes" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/montserrat"
+
+                    android:textSize="@dimen/textSize12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/text_rating"
+                    app:layout_constraintStart_toStartOf="@+id/iv_runtime"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_runtime"
+                    tools:text="While searching for their estranged mother, two beautiful sisters, Dagmar and Ursula, arrive at a luxurious seaside hotel. At the same time, a mysterious killer starts murdering promiscuous women in the area." />
+
+
+                <TextView
+                    android:id="@+id/tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/budget"
+                    android:textSize="@dimen/textSize10sp"
+                    app:layout_constraintStart_toStartOf="@+id/tv_description"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_description" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_budget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/montserrat"
+                    android:textSize="@dimen/textSize8sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv"
+                    app:layout_constraintStart_toEndOf="@+id/tv"
+                    app:layout_constraintTop_toTopOf="@+id/tv"
+                    tools:text="$110,0000" />
+
+                <TextView
+                    android:id="@+id/tv2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/revenue"
+                    android:textSize="@dimen/textSize8sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_revenues"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_description"
+                    app:layout_constraintTop_toTopOf="@+id/tv_revenues" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_revenues"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:fontFamily="@font/montserrat"
+                    android:textSize="@dimen/textSize8sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_budget"
+                    app:layout_constraintEnd_toStartOf="@+id/tv2"
+                    app:layout_constraintTop_toTopOf="@+id/tv_budget"
+                    tools:text="TextView" />
+
+                <TextView
+                    android:id="@+id/tv_cast"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin16dp"
+                    android:layout_marginTop="@dimen/margin8dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Cast and Crew"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_budget" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_movie_cast"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_cast"
+                    tools:listitem="@layout/list_item_movie_details_cast" />
+
+                <TextView
+                    android:id="@+id/tv_media"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin8dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="@string/media"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/tv_cast"
+                    app:layout_constraintTop_toBottomOf="@id/rv_movie_cast" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_movie_media"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin4dp"
+                    android:layout_marginEnd="@dimen/margin16dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tv_media"
+                    app:layout_constraintTop_toBottomOf="@id/tv_media"
+                    tools:listitem="@layout/list_item_media" />
+
+                <TextView
+                    android:id="@+id/tv_similar_movies"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin8dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Similar Movies"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/tv_media"
+                    app:layout_constraintTop_toBottomOf="@id/rv_movie_media" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_similar_movies"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin4dp"
+                    android:layout_marginEnd="@dimen/margin16dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tv_similar_movies"
+                    app:layout_constraintTop_toBottomOf="@id/tv_similar_movies"
+                    tools:listitem="@layout/list_item_movie_details_similar_movie" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

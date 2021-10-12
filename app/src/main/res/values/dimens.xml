@@ -10,6 +10,8 @@
     <dimen name="padding8dp">8dp</dimen>
     <dimen name="textSize16sp">16sp</dimen>
     <dimen name="textSize12sp">12sp</dimen>
+    <dimen name="textSize10sp">10sp</dimen>
+    <dimen name="textSize8sp">8sp</dimen>
     <dimen name="upcomingItemWidth">300dp</dimen>
     <dimen name="upcomingItemHeight">450dp</dimen>
     <dimen name="margin4dp">4dp</dimen>

@@ -1,5 +1,3 @@
-
-
 package com.example.myapplication.data.repository
 
 import androidx.lifecycle.MutableLiveData
@@ -20,6 +18,8 @@ import retrofit2.Call
 
 abstract class BaseRepository {
 
+
+
     protected suspend fun <Response : BaseListResponse<ListType>, ListType> loadPageListCall(
         call: () -> Call<Response>,
         result: MutableLiveData<List<ListType>>,
@@ -27,12 +27,22 @@ abstract class BaseRepository {
     ) =
         withContext(Dispatchers.IO) {
             call().request { response ->
-                response.onSuccess { data?.let {
-                    result.postValue((it).results) } }
-                response.onException { message?.let {
-                    errorText(it) } }
-                response.onFailure { message?.let {
-                    errorText(it) } }
+                response.onSuccess {
+                    data?.let {
+                        result.postValue((it).results)
+
+                    }
+                }
+                response.onException {
+                    message?.let {
+                        errorText(it)
+                    }
+                }
+                response.onFailure {
+                    message?.let {
+                        errorText(it)
+                    }
+                }
             }
             result.apply { postValue(null) }
         }

@@ -4,13 +4,7 @@ package com.example.myapplication.ui.home.binding
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import com.example.myapplication.data.GoToMovie
-import com.example.myapplication.data.InfiniteContentScrollListener
-import com.example.myapplication.data.model.domain.MovieDomain
-import com.example.myapplication.data.remote.MovieDto
-import com.example.myapplication.ui.home.adapter.HomeAdapter
 import com.example.myapplication.util.Constants
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
@@ -19,6 +13,7 @@ import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
  * Created by Ahmad Sedeek on 9/19/2021.
  */
 
+/*
 @BindingAdapter("bind_movie_list", "bind_load_more", "bind_view_model")
 fun RecyclerView.bindMovieList(
     items: List<MovieDto>?,
@@ -33,6 +28,8 @@ fun RecyclerView.bindMovieList(
     }
     (this.adapter as HomeAdapter).submitList(items)
 }
+*/
+
 
 
 

@@ -19,6 +19,11 @@ interface MovieService {
     ): Response<MovieResponse>
 
     @GET("$API_VERSION/movie/popular")
+    suspend fun getPopularMoviesRemote(
+        @Query("page") page: Int?
+    ): MovieResponse
+
+    @GET("$API_VERSION/movie/popular")
      fun getPopularMoviesCall(
         @Query("page") page: Int?
     ): Call<MovieResponse>

@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_showAllFragment"
             app:destination="@id/viewAllFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_movieDetailsFragment2"
+            app:destination="@id/movieDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/viewAllFragment"
@@ -38,5 +41,14 @@
         android:name="com.example.myapplication.ui.favourite.FavouriteFragment"
         android:label="FavouriteFragment"
         tools:layout="@layout/fragment_favourite"/>
+    <fragment
+        android:id="@+id/movieDetailsFragment"
+        android:name="com.example.myapplication.ui.moviedetails.MovieDetailsFragment"
+        android:label="fragment_movie_details"
+        tools:layout="@layout/fragment_movie_details" >
+        <argument
+            android:name="movieId"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>

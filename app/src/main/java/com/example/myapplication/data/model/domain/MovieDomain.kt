@@ -3,23 +3,20 @@ package com.example.myapplication.data.model.domain
 import androidx.room.ColumnInfo
 
 data class MovieDomain(
-    val id: Int?,
+    val id: Int,
     val title: String?,
-    /*@Json(name = "genre_ids")
-    val genreIds: List<Int?>*/
-    //val backDropPath: String?,
-
-    val posterPath: String?,
-
-    val voteAverage: Double?,
-
-    //val voteCount: Int?,
-
-    val releaseDate: String?,
-
-    //val originalLanguage: String?,
-
+    val adult: Boolean,
+    val backDropPath: String?,
+    val genreIds: List<Int?> = listOf(),
+    val originalLanguage: String?,
+    val originalTitle: String?,
     val overview: String?,
+    val popularity: Double,
+    val posterPath: String?,
+    val releaseDate: String?,
+    val video: Boolean,
+    val voteAverage: Double?,
+    val voteCount: Int?,
 
     ) {
     val imageUrl: String?

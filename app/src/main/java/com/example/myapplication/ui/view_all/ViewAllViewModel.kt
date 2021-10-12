@@ -3,22 +3,14 @@ package com.example.myapplication.ui.view_all
 import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import androidx.room.ExperimentalRoomApi
-import com.example.myapplication.data.GoToMovie
-import com.example.myapplication.data.mediator.PageKeyedRemoteMediator
 import com.example.myapplication.data.model.Event
 import com.example.myapplication.data.model.domain.MovieDomain
-import com.example.myapplication.data.model.entity.Movie
-import com.example.myapplication.data.remote.MovieDto
 import com.example.myapplication.data.repository.MovieRepository
-import com.example.myapplication.extension.appendList
 import com.example.myapplication.util.MovieListType
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.map
 import timber.log.Timber
 import javax.inject.Inject
 

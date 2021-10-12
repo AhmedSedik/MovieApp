@@ -1,5 +1,7 @@
 package com.example.myapplication.di
 
+import com.example.myapplication.data.datasource.LocalMoviesDataSource
+import com.example.myapplication.data.datasource.RemoteMovieDataSource
 import com.example.myapplication.data.local.MovieDatabase
 import com.example.myapplication.data.remote.MovieService
 import com.example.myapplication.data.repository.MovieRepository
@@ -23,15 +25,20 @@ object RepositoryModule {
 
     @Provides
     @ActivityRetainedScoped
-    fun provideMovieRepository(moviesDatabase: MovieDatabase,movieServiceHelper: MovieService,movieListType: MovieListType):
-            MovieRepository = MovieRepository(moviesDatabase,movieServiceHelper,movieListType)
+    fun provideMovieRepository(
+        moviesDatabase: MovieDatabase,
+        movieServiceHelper: MovieService,
+        remoteMovieDataSource: RemoteMovieDataSource,
+        localMovieDataSource: LocalMoviesDataSource
+    ): MovieRepository = MovieRepository(
+        moviesDatabase, movieServiceHelper,
+        remoteMovieDataSource, localMovieDataSource
+    )
 
 
     //TODO correct Provides later
     @Provides
-     fun provideEnum()= MovieListType.POPULAR
-
-
+    fun provideEnum() = MovieListType.POPULAR
 
 
 }

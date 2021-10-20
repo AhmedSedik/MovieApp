@@ -5,7 +5,7 @@ import androidx.room.*
 @Entity(tableName = "remote_keys_top")
 data class TopRatedKey(
     @PrimaryKey(autoGenerate = true)
-    val topRatedId: Int,
-    val movieId: Int,
+    val topRatedId: Long,
+    val movieId: Long,
     val page: Int?
 )

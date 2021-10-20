@@ -14,7 +14,10 @@ import kotlinx.parcelize.Parcelize
 @Entity(tableName = "movies")
 
 data class Movie(
-    @PrimaryKey val id: Int,
+
+    @PrimaryKey
+    @ColumnInfo(name = "movie_id")
+    val id: Long,
 
     @ColumnInfo(name = "title")
     val title: String?,
@@ -39,7 +42,7 @@ data class Movie(
     val overview: String?,
 
     @ColumnInfo(name = "popularity")
-    val popularity: Double,
+    val popularity: Double?,
 
     @ColumnInfo(name = "poster_path")
     val posterPath: String?,

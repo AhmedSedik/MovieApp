@@ -36,9 +36,12 @@ object RepositoryModule {
     )
 
 
+
+
     //TODO correct Provides later
     @Provides
     fun provideEnum() = MovieListType.POPULAR
+
 
 
 }

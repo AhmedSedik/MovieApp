@@ -6,11 +6,9 @@ import com.example.movieapplication.models.pos.PopularPos
 import com.example.movieapplication.models.pos.TopRatedPos
 import com.example.movieapplication.models.pos.UpcomingPos
 import com.example.myapplication.data.local.converters.Converter
-import com.example.myapplication.data.model.entity.Movie
-import com.example.myapplication.data.model.entity.PopularKey
-import com.example.myapplication.data.model.entity.TopRatedKey
-import com.example.myapplication.data.model.entity.UpcomingKey
+import com.example.myapplication.data.model.entity.*
 import com.example.myapplication.util.Constants
+import com.squareup.moshi.Moshi
 
 /**
  * Created by Ahmad Sedeek on 9/22/2021.
@@ -18,6 +16,7 @@ import com.example.myapplication.util.Constants
 @Database(
     entities = [
         Movie::class,
+        MovieDetails::class,
         PopularKey::class,
         TopRatedKey::class,
         UpcomingKey::class,
@@ -30,6 +29,7 @@ abstract class MovieDatabase : RoomDatabase() {
 
 
     abstract fun movieDao(): MovieDao
+    abstract fun movieDetailsDao(): MovieDetailsDao
     abstract fun remoteKeyPopularDao(): RemoteKeyPopularDao
     abstract fun remoteKeyTopRatedDao(): RemoteKeyTopRatedDao
     abstract fun remoteKeyTUpcomingDao(): RemoteKeyUpcomingDao
@@ -39,7 +39,7 @@ abstract class MovieDatabase : RoomDatabase() {
     abstract fun upcomingPosDao(): UpcomingPosDao
 
     companion object {
-
+        lateinit var moshi: Moshi
         @Volatile
         private var INSTANCE: MovieDatabase? = null
 

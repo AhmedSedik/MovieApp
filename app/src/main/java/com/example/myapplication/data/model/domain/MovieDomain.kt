@@ -1,9 +1,9 @@
 package com.example.myapplication.data.model.domain
 
-import androidx.room.ColumnInfo
+
 
 data class MovieDomain(
-    val id: Int,
+    val id: Long,
     val title: String?,
     val adult: Boolean,
     val backDropPath: String?,
@@ -11,7 +11,7 @@ data class MovieDomain(
     val originalLanguage: String?,
     val originalTitle: String?,
     val overview: String?,
-    val popularity: Double,
+    val popularity: Double?,
     val posterPath: String?,
     val releaseDate: String?,
     val video: Boolean,

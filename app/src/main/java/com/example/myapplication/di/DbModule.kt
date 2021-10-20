@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.example.myapplication.data.local.MovieDao
 import com.example.myapplication.data.local.MovieDatabase
+import com.example.myapplication.data.local.MovieDetailsDao
 import com.example.myapplication.util.Constants.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
@@ -24,6 +25,10 @@ object DbModule{
     @Provides
     fun provideMovieDao(movieDb: MovieDatabase): MovieDao {
         return movieDb.movieDao()
+    }
+    @Provides
+    fun provideMovieDetailsDao(movieDb: MovieDatabase): MovieDetailsDao {
+        return movieDb.movieDetailsDao()
     }
 
     @Singleton

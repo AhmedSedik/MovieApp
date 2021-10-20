@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.myapplication.BuildConfig
 import com.example.myapplication.MainApplication
 import com.example.myapplication.data.local.MovieDatabase
+import com.example.myapplication.data.local.converters.GenreCustomAdapter
 import com.example.myapplication.data.remote.MovieService
 import com.example.myapplication.data.remote.RequestInterceptor
 import com.example.myapplication.data.repository.MovieRepository
@@ -77,10 +78,8 @@ object NetworkModule {
     @Singleton
     @Provides
     fun providesMoshi():Moshi = Moshi.Builder()
-        .add(KotlinJsonAdapterFactory())
+        .add(KotlinJsonAdapterFactory()).add(GenreCustomAdapter())
         .build()
-
-
 
     @Provides
     fun provideMoshiConverterFactory(moshi: Moshi): Converter.Factory =

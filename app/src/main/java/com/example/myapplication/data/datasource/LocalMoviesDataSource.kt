@@ -1,8 +1,13 @@
 package com.example.myapplication.data.datasource
 
 import com.example.myapplication.data.local.MovieDao
+import com.example.myapplication.data.local.MovieDetailsDao
+import com.example.myapplication.data.mapDetailsToDomain
+import com.example.myapplication.data.mapToDomain
+import com.example.myapplication.data.model.domain.MovieDetailsDomain
 import com.example.myapplication.data.model.domain.MovieDomain
 import com.example.myapplication.data.model.entity.Movie
+import com.example.myapplication.data.model.entity.MovieDetails
 import com.example.myapplication.data.repository.MovieCache
 import com.example.myapplication.data.toDomain
 import kotlinx.coroutines.flow.Flow
@@ -13,18 +18,36 @@ import javax.inject.Inject
  * Created by Ahmad Sedeek on 10/11/2021.
  */
 class LocalMoviesDataSource @Inject constructor(
-        private val movieDao: MovieDao
+        private val movieDao: MovieDao,
+        private val movieDetailsDao: MovieDetailsDao
 ) : MovieCache{
-        override fun getMovies(page: Int?): Flow<List<MovieDomain>> = movieDao.getMoviesFlow().map {
-            it.toDomain()
+        override fun getMovies(page: Int?): Flow<List<MovieDomain>> =
+            movieDao.getMoviesFlow().map {
+            it.map { movie->
+                movie.mapToDomain()
+            }
+        }
+//here is the problem of mapping
+    //TODO:
+    override fun getMovieById(movieId: Long): Flow<MovieDetailsDomain> =
+        movieDetailsDao.getMovieById(movieId).map {
+
+            it.mapDetailsToDomain()
         }
 
-
-        override suspend fun insert(movies: List<Movie>) {
+    override suspend fun insert(movies: List<Movie>) {
              movieDao.insert(movies)
         }
 
-        override suspend fun deleteAll() {
+    override suspend fun insertDetails(movie: MovieDetails) {
+        movieDetailsDao.insertMovie(movie)
+    }
+
+    override suspend fun deleteAll() {
                movieDao.deleteAllPopularMovies()
         }
+
+    override suspend fun deleteDetails() {
+        movieDetailsDao.deleteAllMovieDetails()
+    }
 }

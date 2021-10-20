@@ -1,11 +1,15 @@
 package com.example.myapplication.data.remote
 
+import com.example.myapplication.data.local.MovieDetailsDao
+import com.example.myapplication.data.model.entity.MovieDetails
 import com.example.myapplication.util.Constants.API_VERSION
 
 import com.example.myapplication.data.model.response.MovieResponse
+import com.example.myapplication.data.remote.movies.MovieDetailsDto
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 /**
@@ -43,5 +47,10 @@ interface MovieService {
     suspend fun getMoviesList(
         @Query("page") page: Int?
     ): Response<MovieResponse>
+
+    @GET("$API_VERSION/movie/{id}")
+    suspend fun getMovieById(
+        @Path("id") movieId: Long?
+        ): Response<MovieDetailsDto>
 
 }

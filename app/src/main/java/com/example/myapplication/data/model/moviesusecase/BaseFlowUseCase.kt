@@ -16,4 +16,6 @@ abstract class BaseFlowUseCase<in P, R>() {
 
 
     abstract fun execute(parameter: P): Flow<Resources<R>>
+
+
 }

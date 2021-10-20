@@ -5,7 +5,7 @@ import androidx.room.*
 @Entity(tableName = "remote_keys_popular")
 data class PopularKey(
     @PrimaryKey(autoGenerate = true)
-    val popularId: Int,
-    val movieId: Int,
+    val popularId: Long,
+    val movieId: Long,
     val page: Int?
 )

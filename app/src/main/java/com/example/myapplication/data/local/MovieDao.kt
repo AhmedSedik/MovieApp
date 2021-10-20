@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.paging.PagingSource
 import androidx.room.*
 import com.example.myapplication.data.model.entity.Movie
+import com.example.myapplication.data.model.entity.MovieDetails
+import com.example.myapplication.data.remote.movies.MovieDetailsDto
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -18,11 +20,11 @@ interface MovieDao {
     @Query("SELECT * FROM movies ORDER BY api_page_index")
     fun getMoviesFlow(): Flow<List<Movie>>
 
+
+
     @Query("SELECT * FROM movies")
     fun getAllMovies(): Flow<List<Movie>>
 
-    @Query("SELECT * FROM movies")
-    suspend fun getMovieList(): List<Movie>
 
     @Query("SELECT * FROM movies")
      fun getMovieListLiveData(): LiveData<List<Movie>>

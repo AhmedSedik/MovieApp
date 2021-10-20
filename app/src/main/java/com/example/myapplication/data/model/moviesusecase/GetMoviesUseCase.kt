@@ -1,5 +1,6 @@
 package com.example.myapplication.data.model.moviesusecase
 
+import com.example.myapplication.data.model.domain.MovieDetailsDomain
 import com.example.myapplication.data.model.domain.MovieDomain
 import com.example.myapplication.data.repository.MovieRepository
 import com.example.myapplication.util.Resources
@@ -13,4 +14,7 @@ class GetMoviesUseCase @Inject constructor(
 
     override fun execute(parameter: Unit): Flow<Resources<List<MovieDomain>>> =
         movieRepository.getPopularMovies(1)
+
+
+
 }

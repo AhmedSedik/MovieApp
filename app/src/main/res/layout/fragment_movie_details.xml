@@ -4,10 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="viewModel"
+            type="com.example.myapplication.ui.moviedetails.MovieDetailsViewModel" />
 
+        <variable
+            name="movie"
+            type="com.example.myapplication.data.model.domain.MovieDetailsDomain" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -61,7 +68,7 @@
                     android:fontFamily="@font/montserrat_bold"
                     android:maxLines="1"
                     android:textColor="@color/white"
-
+                    android:text="@{movie.title}"
                     android:textSize="@dimen/textSize12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

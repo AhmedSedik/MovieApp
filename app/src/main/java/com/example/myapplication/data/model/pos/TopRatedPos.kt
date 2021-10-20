@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "top_rated_pos")
 data class TopRatedPos(
     @PrimaryKey(autoGenerate = true)
-    val topRatedId: Int,
-    val movieId: Int,
+    val topRatedId: Long    ,
+    val movieId: Long,
     val position: Int
 )

@@ -3,7 +3,7 @@ buildscript {
     ext {
         kotlinVersion = '1.5.20'
         navigationVersion = '2.3.5'
-        hiltVersion = '2.38.1'
+        hiltVersion = '2.37'
 
         // Sdk and tools
         minSdkVersion = 23

@@ -76,26 +76,11 @@ class HomeFragment
         findNavController().navigate(navigateAction)
     }
 
-    private fun navigateDetail(id: Int) {
+    private fun navigateDetail(id: Long) {
         findNavController().navigate(
             HomeFragmentDirections.actionHomeFragmentToMovieDetailsFragment2(id)
         )
     }
-
-
-    /*   private fun setupView() {
-           binding.popularRecyclerView.apply {
-               val horizontalLayoutManager =
-                   LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-
-
-               layoutManager = horizontalLayoutManager
-               adapter = pagingAdapter.withLoadStateHeaderAndFooter(
-                   header = MoviesLoadStateAdapter(retryListener = { pagingAdapter.retry() }),
-                   footer = MoviesLoadStateAdapter(retryListener = { pagingAdapter.retry() })
-               )
-           }
-       }*/
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_menu, menu)

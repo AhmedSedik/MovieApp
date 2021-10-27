@@ -38,7 +38,7 @@ abstract class MovieDatabase : RoomDatabase() {
     abstract fun topRatedPosDao(): TopRatedPosDao
     abstract fun upcomingPosDao(): UpcomingPosDao
 
-    companion object {
+  /*  companion object {
         lateinit var moshi: Moshi
         @Volatile
         private var INSTANCE: MovieDatabase? = null
@@ -53,6 +53,7 @@ abstract class MovieDatabase : RoomDatabase() {
             Room.databaseBuilder(
                 context.applicationContext,
                 MovieDatabase::class.java, Constants.DATABASE_NAME
-            ).build()
-    }
+            ).fallbackToDestructiveMigration()
+                .build()
+    }*/
 }

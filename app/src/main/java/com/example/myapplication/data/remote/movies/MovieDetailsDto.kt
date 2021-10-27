@@ -1,7 +1,10 @@
 package com.example.myapplication.data.remote.movies
 
 import com.example.myapplication.data.model.SpokenLanguage
+import com.example.myapplication.data.model.cast.Cast
+import com.example.myapplication.data.model.entity.Movie
 import com.example.myapplication.data.model.graphics.Graphics
+import com.example.myapplication.data.model.response.MovieResponse
 import com.example.myapplication.data.model.video.VideoResponse
 import com.example.myapplication.data.remote.Credits
 import com.example.myapplication.data.remote.Genre
@@ -14,81 +17,49 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class MovieDetailsDto(
 
- @Json(name = "adult")
- val adult: Boolean,
+ @field:Json(name = "id") val id: Int?,
+ @field:Json(name = "adult") val adult: Boolean?,
+ @field:Json(name = "backdrop_path") val backdropPath: String?,
+ @field:Json(name = "budget") val budget: Int?,
+ @field:Json(name = "genres") val genres: List<Genre>?,
+ @field:Json(name = "homepage") val homepage: String?,
+ @field:Json(name = "imdb_id") val imdbId: String?,
+ @field:Json(name = "original_language") val originalLanguage: String?,
+ @field:Json(name = "original_title") val originalTitle: String?,
+ @field:Json(name = "overview") val overview: String?,
+ @field:Json(name = "popularity") val popularity: Double?,
+ @field:Json(name = "poster_path") val posterPath: String?,
+ @field:Json(name = "production_companies") val productionCompanies: List<ProductionCompany>?,
+ @field:Json(name = "production_countries") val productionCountries: List<ProductionCountry>?,
+ @field:Json(name = "release_date") val releaseDate: String?,
+ @field:Json(name = "revenue") val revenue: Int?,
+ @field:Json(name = "runtime") val runtime: Int?,
+ @field:Json(name = "spoken_languages") val spokenLanguages: List<SpokenLanguage>?,
+ @field:Json(name = "status") val status: String?,
+ @field:Json(name = "tagline") val tagline: String?,
+ @field:Json(name = "title") val title: String?,
+ @field:Json(name = "video") val video: Boolean?,
+ @field:Json(name = "vote_average") val voteAverage: Double?,
+ @field:Json(name = "vote_count") val voteCount: Int?,
+// @field:Json(name = "watch/providers") val watchProviders: MovieWatchProviders?,
+ @field:Json(name = "recommendations") val recommendations: MovieResponse,
+ @field:Json(name = "cast") val cast: Cast,
 
- @Json(name = "backdrop_path")
- val backdropPath: String?,
+ @field:Json(name = "credits") val credits: Credits,
 
- /*@Json(name = "belongs_to_collection")
- val belongsToCollection: Collection?,*/
+// @Json(name = "images") val images: Graphics,
+// @Json(name = "videos") val videoResponse: VideoResponse
+){
 
- @Json(name = "budget")
- val budget: Int,
+ data class ProductionCompany(
+  @field:Json(name = "id") val id: Int?,
+  @field:Json(name = "logo_path") val logoPath: String?,
+  @field:Json(name = "name") val name: String?,
+  @field:Json(name = "origin_country") val originCountry: String?
+ )
 
- @Json(name = "genres")
- val genres: List<Genre>,
-
- @Json(name = "homepage")
- val homepage: String?,
-
- @Json(name = "id")
- val id: Long,
-
- @Json(name = "imdb_id")
- val imdbId: String?,
-
- @Json(name = "original_language")
- val originalLanguage: String?,
-
- @Json(name = "original_title")
- val originalTitle: String?,
-
- @Json(name = "overview")
- val overview: String?,
-
- @Json(name = "popularity")
- val popularity: Double?,
-
- @Json(name = "poster_path")
- val posterPath: String?,
-
- /*@Json(name = "production_companies")
- val productionCompanies: List<ProductionCompany>,
-
- @Json(name = "production_countries")
- val productionCountries: List<ProductionCountry>,*/
-
- @Json(name = "release_date")
- val releaseDate: String?,
-
- @Json(name = "revenue")
- val revenue: Long?,
- @Json(name = "runtime") val runtime: Int?,
-
- @Json(name = "spoken_languages")
- val spokenLanguages: List<SpokenLanguage>,
-
- @Json(name = "status")
- val status: String?,
-
- @Json(name = "tagline")
- val tagline: String?,
-
- @Json(name = "title")
- val title: String?,
-
- @Json(name = "video")
- val video: Boolean,
-
- @Json(name = "vote_average")
- val voteAverage: Double?,
-
- @Json(name = "vote_count")
- val voteCount: Int?,
-
- // AppendToResponse
- @Json(name = "images") val images: Graphics,
- @Json(name = "credits") val credits: Credits,
- @Json(name = "videos") val videoResponse: VideoResponse
-)
+ data class ProductionCountry(
+  @field:Json(name = "iso_3166_1") val iso31661: String?,
+  @field:Json(name = "name") val name: String?
+ )
+}

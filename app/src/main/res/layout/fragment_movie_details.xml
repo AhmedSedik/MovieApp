@@ -322,5 +322,13 @@
         </androidx.core.widget.NestedScrollView>
 
 
+        <include
+            android:id="@+id/network_state"
+            layout="@layout/item_network_state"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -2,40 +2,28 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "da2e03dfe9d7a1c84f9c472e51fe639e",
+    "identityHash": "17d76975b11e08abec5921bac3229fcf",
     "entities": [
       {
         "tableName": "movies",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`movie_id` INTEGER NOT NULL, `title` TEXT, `adult` INTEGER NOT NULL, `backdrop_path` TEXT, `genre_ids` TEXT NOT NULL, `original_language` TEXT, `original_title` TEXT, `overview` TEXT, `popularity` REAL, `poster_path` TEXT, `release_date` TEXT, `video` INTEGER NOT NULL, `vote_average` REAL, `vote_count` INTEGER, `api_page_index` INTEGER, PRIMARY KEY(`movie_id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`adult` INTEGER, `backdrop_path` TEXT, `id` INTEGER NOT NULL, `original_language` TEXT, `original_title` TEXT, `overview` TEXT, `popularity` REAL, `poster_path` TEXT, `release_date` TEXT, `title` TEXT, `video` INTEGER, `vote_average` REAL, `vote_count` INTEGER, `api_page_index` INTEGER, PRIMARY KEY(`id`))",
         "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "movie_id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "title",
-            "columnName": "title",
-            "affinity": "TEXT",
-            "notNull": false
-          },
           {
             "fieldPath": "adult",
             "columnName": "adult",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           },
           {
-            "fieldPath": "backDropPath",
+            "fieldPath": "backdropPath",
             "columnName": "backdrop_path",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "genreIds",
-            "columnName": "genre_ids",
-            "affinity": "TEXT",
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -75,10 +63,16 @@
             "notNull": false
           },
           {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
             "fieldPath": "video",
             "columnName": "video",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "voteAverage",
@@ -101,7 +95,7 @@
         ],
         "primaryKey": {
           "columnNames": [
-            "movie_id"
+            "id"
           ],
           "autoGenerate": false
         },
@@ -110,73 +104,19 @@
       },
       {
         "tableName": "movie_details",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`adult` INTEGER NOT NULL, `backdrop_path` TEXT, `budget` INTEGER, `genres` TEXT NOT NULL, `homepage` TEXT, `moviedetails_id` INTEGER NOT NULL, `imdb_id` TEXT, `original_language` TEXT, `original_title` TEXT, `overview` TEXT, `popularity` REAL, `poster_path` TEXT, `release_date` TEXT, `revenue` INTEGER, `runtime` INTEGER, `spoken_languages` TEXT NOT NULL, `status` TEXT, `tagline` TEXT, `title` TEXT, `video` INTEGER NOT NULL, `vote_average` REAL, `vote_count` INTEGER, `images` TEXT NOT NULL, `credits` TEXT NOT NULL, `videos` TEXT NOT NULL, PRIMARY KEY(`moviedetails_id`), FOREIGN KEY(`moviedetails_id`) REFERENCES `movies`(`movie_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `overview` TEXT NOT NULL, `poster_path` TEXT, `release_date` TEXT, `title` TEXT NOT NULL, `genres` TEXT NOT NULL, `popularity` REAL NOT NULL, `vote_average` REAL, `vote_count` INTEGER, `status` TEXT NOT NULL, `recommendations` TEXT, `cast` TEXT, `credits` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
-            "fieldPath": "adult",
-            "columnName": "adult",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "backdropPath",
-            "columnName": "backdrop_path",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "budget",
-            "columnName": "budget",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
-            "fieldPath": "genres",
-            "columnName": "genres",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "homepage",
-            "columnName": "homepage",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
             "fieldPath": "id",
-            "columnName": "moviedetails_id",
+            "columnName": "id",
             "affinity": "INTEGER",
             "notNull": true
-          },
-          {
-            "fieldPath": "imdbId",
-            "columnName": "imdb_id",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "originalLanguage",
-            "columnName": "original_language",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "originalTitle",
-            "columnName": "original_title",
-            "affinity": "TEXT",
-            "notNull": false
           },
           {
             "fieldPath": "overview",
             "columnName": "overview",
             "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "popularity",
-            "columnName": "popularity",
-            "affinity": "REAL",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "posterPath",
@@ -191,45 +131,21 @@
             "notNull": false
           },
           {
-            "fieldPath": "revenue",
-            "columnName": "revenue",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
-            "fieldPath": "runtime",
-            "columnName": "runtime",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
-            "fieldPath": "spokenLanguages",
-            "columnName": "spoken_languages",
+            "fieldPath": "title",
+            "columnName": "title",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "status",
-            "columnName": "status",
+            "fieldPath": "genres",
+            "columnName": "genres",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
-            "fieldPath": "tagline",
-            "columnName": "tagline",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "title",
-            "columnName": "title",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "video",
-            "columnName": "video",
-            "affinity": "INTEGER",
+            "fieldPath": "popularity",
+            "columnName": "popularity",
+            "affinity": "REAL",
             "notNull": true
           },
           {
@@ -245,44 +161,38 @@
             "notNull": false
           },
           {
-            "fieldPath": "images",
-            "columnName": "images",
+            "fieldPath": "status",
+            "columnName": "status",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "recommendations",
+            "columnName": "recommendations",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cast",
+            "columnName": "cast",
+            "affinity": "TEXT",
+            "notNull": false
           },
           {
             "fieldPath": "credits",
             "columnName": "credits",
             "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "videoResponse",
-            "columnName": "videos",
-            "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           }
         ],
         "primaryKey": {
           "columnNames": [
-            "moviedetails_id"
+            "id"
           ],
           "autoGenerate": false
         },
         "indices": [],
-        "foreignKeys": [
-          {
-            "table": "movies",
-            "onDelete": "CASCADE",
-            "onUpdate": "NO ACTION",
-            "columns": [
-              "moviedetails_id"
-            ],
-            "referencedColumns": [
-              "movie_id"
-            ]
-          }
-        ]
+        "foreignKeys": []
       },
       {
         "tableName": "remote_keys_popular",
@@ -480,7 +390,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'da2e03dfe9d7a1c84f9c472e51fe639e')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '17d76975b11e08abec5921bac3229fcf')"
     ]
   }
 }

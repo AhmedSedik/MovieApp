@@ -11,10 +11,10 @@ import kotlinx.coroutines.flow.Flow
 interface MovieCache {
 
     fun getMovies(page:Int?): Flow<List<MovieDomain>>
-    fun getMovieById(movieId: Long): Flow<MovieDetailsDomain>
+    fun getMovieById(movieId: Long): Flow<MovieDetailsDomain?>
 
     suspend fun insert(movies: List<Movie>)
-    suspend fun insertDetails(movie: MovieDetails)
+    suspend fun insertDetails(movie: MovieDetails?)
     suspend fun deleteAll()
     suspend fun deleteDetails()
 }

@@ -3,18 +3,17 @@ package com.example.myapplication.data.model.domain
 
 
 data class MovieDomain(
+    val adult: Boolean?,
+    val backdropPath: String?,
     val id: Long,
-    val title: String?,
-    val adult: Boolean,
-    val backDropPath: String?,
-    val genreIds: List<Int?> = listOf(),
     val originalLanguage: String?,
     val originalTitle: String?,
     val overview: String?,
     val popularity: Double?,
     val posterPath: String?,
     val releaseDate: String?,
-    val video: Boolean,
+    val title: String?,
+    val video: Boolean?,
     val voteAverage: Double?,
     val voteCount: Int?,
 

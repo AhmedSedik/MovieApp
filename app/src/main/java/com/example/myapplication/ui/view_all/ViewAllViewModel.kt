@@ -64,8 +64,8 @@ class ViewAllViewModel @ExperimentalCoroutinesApi @Inject constructor(
 /*
 private val page = MutableLiveData<Int>().apply { value = 1 }
 
-private val _moviesList: LiveData<List<Movie>>
-val movieList = MediatorLiveData<MutableList<Movie>>()
+private val _moviesList: LiveData<List<Movies>>
+val movieList = MediatorLiveData<MutableList<Movies>>()
 
 init {
     Timber.d("ShowALlViewModel")
@@ -99,5 +99,5 @@ fun loadMoreMovies() {
     page.value = page.value?.plus(1)
 }
 
-override val goToMovieDetailsEvent: MutableLiveData<Event<Movie>>
+override val goToMovieDetailsEvent: MutableLiveData<Event<Movies>>
     get() = TODO("Not yet implemented")*/

@@ -7,6 +7,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface RemoteMovieRepository  {
      suspend fun getMovies(page: Int?): List<Movie>
-     suspend fun getMovieById(movieId: Long): MovieDetails
+     suspend fun getMovieById(movieId: Long): MovieDetails?
 
 }

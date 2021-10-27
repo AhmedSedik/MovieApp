@@ -1,6 +1,7 @@
 package com.example.myapplication.data
 
 import com.example.myapplication.data.model.cast.Cast
+import com.example.myapplication.data.model.domain.CreditsDomain
 import com.example.myapplication.data.model.domain.MovieDetailsDomain
 
 
@@ -26,30 +27,30 @@ fun Movie.mapToDomain(): MovieDomain = MovieDomain(
     releaseDate = releaseDate.orEmpty(),
     voteAverage = voteAverage,
     adult = adult,
-    backDropPath = backDropPath,
-    genreIds = genreIds,
+    backdropPath = backdropPath,
     originalLanguage = originalLanguage,
     originalTitle = originalTitle,
     popularity = popularity,
     video = video,
-    voteCount = voteCount
+    voteCount = voteCount,
+
 )
 
 fun MovieDto.mapToEntity(apiPageIndex: Int?): Movie = Movie(
-    id = id,
-    title = title,
-    posterPath = posterPath,
-    overview = overview,
-    releaseDate = releaseDate,
-    voteAverage = voteAverage,
-    genreIds = genreIds,
     adult = adult,
+    backdropPath = backdropPath,
+    id = id,
+    originalLanguage= originalLanguage,
+    originalTitle = originalTitle,
+    overview = overview,
     popularity = popularity,
-    originalLanguage = originalLanguage,
-    originalTitle = originalLanguage,
-    backDropPath = backDropPath,
+    posterPath = posterPath,
+    releaseDate = releaseDate,
+    title = title,
     video = video,
+    voteAverage = voteAverage,
     voteCount = voteCount,
+
     apiPageIndex = apiPageIndex
 )
 
@@ -61,12 +62,11 @@ fun mapMovieDtoToEntity(movieDto: MovieDto) = with(movieDto) {
         overview = overview,
         releaseDate = releaseDate,
         voteAverage = voteAverage,
-        genreIds = genreIds,
         adult = adult,
         popularity = popularity,
         originalLanguage = originalLanguage,
         originalTitle = originalLanguage,
-        backDropPath = backDropPath,
+        backdropPath = backdropPath,
         video = video,
         voteCount = voteCount,
         apiPageIndex = null
@@ -86,13 +86,12 @@ fun MovieDto.mapToDomain(): MovieDomain = MovieDomain(
     releaseDate = releaseDate.orEmpty(),
     voteAverage = voteAverage,
     adult = adult,
-    backDropPath = backDropPath,
-    genreIds = genreIds,
     originalLanguage = originalLanguage,
     originalTitle = originalTitle,
     popularity = popularity,
     video = video,
-    voteCount = voteCount
+    voteCount = voteCount,
+    backdropPath = backdropPath
 
 )
 
@@ -104,14 +103,15 @@ fun mapMovieDtoToDomain(movieDto: Movie) = with(movieDto) {
         overview = overview.orEmpty(),
         releaseDate = releaseDate.orEmpty(),
         voteAverage = voteAverage,
-        backDropPath = backDropPath,
+
         adult = adult,
         originalTitle = originalTitle,
         popularity = popularity,
         originalLanguage = originalLanguage,
-        genreIds = genreIds,
+
         voteCount = voteCount,
-        video = video
+        video = video,
+        backdropPath = backdropPath
     )
 
 }
@@ -120,69 +120,66 @@ fun Movie.toDomain() = mapMovieDtoToDomain(this)
 fun List<Movie>.toDomain() = map {
     it.toDomain()
 }
-fun MovieDetails.mapDetailsToDomain():MovieDetailsDomain =
-    MovieDetailsDomain(
-        id = id,
-        title = title,
-        posterPath = posterPath,
-        overview = overview,
-        releaseDate = releaseDate,
-        voteAverage = voteAverage,
-        backdropPath = backdropPath,
-        adult = adult,
-        originalTitle = originalTitle,
-        popularity = popularity,
-        originalLanguage = originalLanguage,
-        voteCount = voteCount,
-        video = video,
-        budget = budget,
-        credits = credits,
-        genres = genres,
-        homepage = homepage,
-        images = images,
-        imdbId = imdbId,
-        revenue = revenue,
-        runtime = runtime,
-        spokenLanguages = spokenLanguages,
-        status = status,
-        tagline = tagline,
-        videoResponse = videoResponse
 
-    )
+fun MovieDetails.toMovieDetails() = MovieDetailsDomain(
+    genres.map {
+        MovieDetailsDomain.Genre(it.id, it.name)
+    },
+    id,
+    overview,
+    posterPath,
+    releaseDate,
+    title,
+
+    voteAverage,
+    voteCount,
+    popularity,
+    status,
+    recommendations?.map {
+        MovieDomain(
+            it.adult,
+            it.backdropPath,
+            it.id,
+            it.originalLanguage,
+            it.originalTitle,
+            it.overview,
+            it.popularity,
+            it.posterPath,
+            it.releaseDate,
+            it.title,
+            it.video,
+            it.voteAverage,
+            it.voteCount,
+        )
+    },
+    cast?.map {
+        CreditsDomain.Cast(
+            it.adult,
+            it.gender,
+            it.id,
+            it.knownForDepartment,
+            it.name,
+            it.originalName,
+            it.popularity,
+            it.profilePath,
+            it.castId,
+            it.character,
+            it.creditId,
+            it.order
+        )
+    },
+)
+
+
+
+fun MovieDetailsDto.toDetailsEntity() = {
+
+}
 
 /*fun MovieDetails.toDomainDetails() = mapDetailsToDomain(this)
 fun List<MovieDetails>.toDomainDetails() = map {
     it.toDomainDetails()
 }*/
-fun MovieDetailsDto.mapDetailsToMovieEntity():MovieDetails=
-    MovieDetails(
-        id = id,
-        adult = adult,
-        overview = overview,
-        popularity = popularity,
-        title = title,
-        video = video,
-        voteCount = voteCount,
-        originalLanguage = originalLanguage,
-        originalTitle = originalTitle,
-        voteAverage = voteAverage,
-        posterPath = posterPath,
-        releaseDate = releaseDate,
-        videoResponse = videoResponse,
-        tagline = tagline,
-        status = status,
-        spokenLanguages = spokenLanguages,
-        runtime = runtime,
-        revenue = revenue,
-        imdbId = imdbId,
-        images = images,
-        homepage = homepage,
-        genres = genres,
-        credits = credits,
-        budget = budget,
-        backdropPath = backdropPath
-    )
-
 
 /*
 private fun MovieDetailsDto.toMovieEntity() = mapDetailsToMovieEntity(this)

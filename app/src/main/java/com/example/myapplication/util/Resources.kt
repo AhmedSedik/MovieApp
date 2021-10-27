@@ -6,5 +6,15 @@ sealed class Resources<T>(
 ) {
     class Success<T>(data: T) : Resources<T>(data)
     class Loading<T>(data: T? = null) : Resources<T>(data)
-    class Error<T>(throwable: Throwable, data: T? = null) : Resources<T>(data, throwable)
+    class Error<T>(throwable: Throwable?, data: T? = null) : Resources<T>(data, throwable)
+
+    sealed class ErrorType(
+        val throwable: Throwable? = null,
+        val message: Int? = null
+    ) {
+        class DatabaseError(throwable: Throwable? = null) : ErrorType(throwable)
+        class IOError(throwable: Throwable? = null) : ErrorType(throwable)
+        class HttpError(throwable: Throwable? = null, val statusCode: Int) : ErrorType(throwable)
+        class Unknown(throwable: Throwable? = null) : ErrorType(throwable)
+    }
 }

@@ -11,19 +11,18 @@ import com.example.myapplication.data.datasource.RemoteMovieDataSource
 import com.example.myapplication.data.local.MovieDatabase
 import com.example.myapplication.data.mapToDomain
 import com.example.myapplication.data.mediator.PageKeyedRemoteMediator
-import com.example.myapplication.data.model.domain.MovieDetailsDomain
+
 import com.example.myapplication.data.model.domain.MovieDomain
-import com.example.myapplication.data.model.entity.Movie
-import com.example.myapplication.data.remote.movies.MovieDto
+
 import com.example.myapplication.data.remote.MovieService
-import com.example.myapplication.extension.bodyOrThrow
+
 import com.example.myapplication.util.*
 import kotlinx.coroutines.flow.*
-import timber.log.Timber
-import java.net.UnknownHostException
+
+import java.util.concurrent.TimeUnit
 
 import javax.inject.Inject
-import kotlin.coroutines.cancellation.CancellationException
+
 
 /**
  * Created by Ahmad Sedeek on 9/19/2021.
@@ -78,8 +77,16 @@ class MovieRepository @Inject constructor(
                 localMovieDataSource.deleteDetails()
                 localMovieDataSource.insertDetails(movieDetails)
             }
+        },
+        shouldFetch = { data->
+            true
         }
     )
+
+    private fun isMovieStale(lastUpdated: Long): Boolean {
+        val oneDay = TimeUnit.DAYS.toMillis(1)
+        return (System.currentTimeMillis() - oneDay) > lastUpdated
+    }
 
 
     fun getPopularMovies(page: Int) = networkBoundResource(
@@ -97,6 +104,8 @@ class MovieRepository @Inject constructor(
 
             }
 
+        },shouldFetch = {
+            true
         }
     )
 

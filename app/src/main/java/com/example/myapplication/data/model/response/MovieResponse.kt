@@ -6,13 +6,13 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class MovieResponse(
-    @Json(name = "page")
+    @field:Json(name = "page")
     override var page: Int,
-    @Json(name = "results")
+    @field:Json(name = "results")
     override val results: List<MovieDto>,
-    @Json(name = "total_pages")
+    @field:Json(name = "total_pages")
     val totalPages: Int,
-    @Json(name = "total_results")
+    @field:Json(name = "total_results")
     val totalResults: Int
 
 ):BaseListResponse<MovieDto>{

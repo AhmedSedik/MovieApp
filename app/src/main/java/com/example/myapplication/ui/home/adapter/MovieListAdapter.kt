@@ -49,8 +49,8 @@ class MovieListAdapter() :
 
     }
 
-    /*  override fun submitList(list: List<Movie>?) {
-          val newList: MutableList<Movie> = arrayListOf()
+    /*  override fun submitList(list: List<Movies>?) {
+          val newList: MutableList<Movies> = arrayListOf()
           if (list != null) newList.addAll(list)
           super.submitList(newList)
            infiniteContentScrollListener.itemsLoaded()

@@ -5,7 +5,11 @@ import androidx.room.Room
 import com.example.myapplication.data.local.MovieDao
 import com.example.myapplication.data.local.MovieDatabase
 import com.example.myapplication.data.local.MovieDetailsDao
+import com.example.myapplication.data.local.converters.Converter
+import com.example.myapplication.util.Constants
 import com.example.myapplication.util.Constants.DATABASE_NAME
+import com.example.myapplication.util.MovieListType
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,6 +26,18 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DbModule{
 
+
+    @Provides
+    @Singleton
+    fun providesRoomDb(
+        @ApplicationContext context: Context,
+        @MoshiDefault moshi: Moshi
+    ) = Room.databaseBuilder(context, MovieDatabase::class.java, Constants.DATABASE_NAME)
+        .addTypeConverter(Converter(moshi))
+        .fallbackToDestructiveMigration()
+        .build()
+
+
     @Provides
     fun provideMovieDao(movieDb: MovieDatabase): MovieDao {
         return movieDb.movieDao()
@@ -30,13 +46,17 @@ object DbModule{
     fun provideMovieDetailsDao(movieDb: MovieDatabase): MovieDetailsDao {
         return movieDb.movieDetailsDao()
     }
-
+/*
     @Singleton
     @Provides
     fun provideAppDb(@ApplicationContext context: Context):MovieDatabase =
-        MovieDatabase.getInstance(context)
+        MovieDatabase.getInstance(context)*/
 
     @Provides
     @Singleton
     fun provideApplicationScope() = CoroutineScope(SupervisorJob())
+
+
+
+
 }

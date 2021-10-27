@@ -6,9 +6,12 @@ import androidx.lifecycle.ViewModel
 import com.example.myapplication.BuildConfig
 import com.example.myapplication.MainApplication
 import com.example.myapplication.data.local.MovieDatabase
-import com.example.myapplication.data.local.converters.GenreCustomAdapter
+
 import com.example.myapplication.data.remote.MovieService
 import com.example.myapplication.data.remote.RequestInterceptor
+import com.example.myapplication.data.remote.jsonAdapter.MovieCreditsJsonAdapter
+import com.example.myapplication.data.remote.jsonAdapter.MovieDetailsJsonAdapter
+import com.example.myapplication.data.remote.jsonAdapter.MoviesJsonAdapter
 import com.example.myapplication.data.repository.MovieRepository
 import com.example.myapplication.util.Constants.BASE_URL
 import com.example.myapplication.util.MovieListType
@@ -63,7 +66,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(okhHttpClient: OkHttpClient, moshi: Moshi): Retrofit {
+    fun provideRetrofit(okhHttpClient: OkHttpClient, @MoshiNetwork moshi: Moshi): Retrofit {
         return Retrofit.Builder()
             .client(okhHttpClient)
             .baseUrl(BASE_URL)
@@ -75,15 +78,29 @@ object NetworkModule {
     @Provides
     fun provideMovieService(retrofit: Retrofit): MovieService = retrofit.create(MovieService::class.java)
 
-    @Singleton
+
     @Provides
+    @MoshiNetwork
     fun providesMoshi():Moshi = Moshi.Builder()
-        .add(KotlinJsonAdapterFactory()).add(GenreCustomAdapter())
+        .add(KotlinJsonAdapterFactory())
+//        .add(GenreCustomAdapter())
+        .add(MovieDetailsJsonAdapter())
+        .add(MovieCreditsJsonAdapter())
+        .add(MoviesJsonAdapter())
         .build()
 
     @Provides
     fun provideMoshiConverterFactory(moshi: Moshi): Converter.Factory =
         MoshiConverterFactory.create(moshi)
+
+    @Provides
+    @MoshiDefault
+    fun provideMoshi(
+        builder: Moshi.Builder
+    ): Moshi = builder.build()
+
+    @Provides
+    fun provideMoshiBuilder() = Moshi.Builder().addLast(KotlinJsonAdapterFactory())
 
 
     /*@Provides

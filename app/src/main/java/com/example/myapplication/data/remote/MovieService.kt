@@ -48,9 +48,10 @@ interface MovieService {
         @Query("page") page: Int?
     ): Response<MovieResponse>
 
-    @GET("$API_VERSION/movie/{id}")
+    @GET("$API_VERSION/movie/{movie_id}")
     suspend fun getMovieById(
-        @Path("id") movieId: Long?
-        ): Response<MovieDetailsDto>
+        @Path("movie_id") movieId: Long?,
+        @Query("append_to_response") appendix: String,
+        ): Response<MovieDetails>
 
 }

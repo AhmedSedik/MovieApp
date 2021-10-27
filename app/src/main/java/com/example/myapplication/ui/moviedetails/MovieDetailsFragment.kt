@@ -13,6 +13,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.myapplication.data.model.domain.MovieDetailsDomain
 import com.example.myapplication.data.model.entity.MovieDetails
 import com.example.myapplication.databinding.FragmentMovieDetailsBinding
+import com.example.myapplication.util.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -31,7 +32,7 @@ class MovieDetailsFragment : Fragment() {
 
     private var movieId: Long = 0
 
-    private lateinit var movie: Resources<MovieDetailsDomain>
+    private var movieDetails: MovieDetailsDomain? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +44,7 @@ class MovieDetailsFragment : Fragment() {
             container,
             false
         ).apply {
-            movieId = args.id
+            movieId = args.movieId
             viewModel = movieDetailsViewModel
             lifecycleOwner = viewLifecycleOwner
 
@@ -58,11 +59,24 @@ class MovieDetailsFragment : Fragment() {
 
 
 
-        movieDetailsViewModel.getMovieById(movieId).observe(viewLifecycleOwner, Observer {  movies->
-            movies.let {
-                binding.movie = it.data
+        movieDetailsViewModel.movieDetails.observe(viewLifecycleOwner){
+            if (it != null) {
+                when (it) {
+                    is Resources.Success-> {
+                        movieDetails = it.data
+                        Timber.d("${it.data}")
+                    }
+                    is Resources.Loading -> {
+                        binding.networkState.progressBar.visible()
+                    }
+                    is Resources.Error -> {
+                        binding.networkState.errorMsg.visible()
+                        binding.networkState.errorMsg.text = "Network error!"
+                    }
+                }
             }
-        })
+        }
+
 
     }
 

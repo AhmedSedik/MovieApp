@@ -10,9 +10,10 @@ import com.squareup.moshi.ToJson
  * Created by Ahmad Sedeek on 10/12/2021.
  */
 
+/*
 class GenreCustomAdapter {
     @ToJson
-    fun toJson(genres: List<Genre>): List<Any> {
+    fun toJson(genres: List<Genre>): List<Int?> {
         return genres.map { genre -> genre.id}
     }
 
@@ -35,11 +36,11 @@ class GenreCustomAdapter {
             10749 -> return Genre(10749, "Romance")
             9648 -> return Genre(9648, "Mystery")
             878 -> return Genre(878, "Science Fiction")
-            10770 -> return Genre(10770, "TV Movie")
+            10770 -> return Genre(10770, "TV Movies")
             53 -> return Genre(53, "Mystery")
             10752 -> return Genre(10752, "War")
             37 -> return Genre(37, "Western")
             else -> throw JsonDataException("unknown genre id: $genreId")
         }
     }
-}
+}*/

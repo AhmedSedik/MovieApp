@@ -18,9 +18,9 @@ import java.lang.Exception
     private val movieService: MovieService,
     private val movieRepository: MovieRepository,
     private val movieListType: MovieListType
-) : PagingSource<Int, Movie>() {
+) : PagingSource<Int, Movies>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Movie> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Movies> {
         return try {
             val nextPage = params.key ?: 1
             val response = movieService.getMoviesList(page = nextPage)
@@ -36,7 +36,7 @@ import java.lang.Exception
     }
 
     @ExperimentalPagingApi
-    override fun getRefreshKey(state: PagingState<Int, Movie>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, Movies>): Int? {
         return null
     }
 

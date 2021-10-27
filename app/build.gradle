@@ -62,7 +62,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.6.0'
     implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
@@ -121,6 +121,8 @@ dependencies {
     // Moshi
     implementation "com.squareup.moshi:moshi:$rootProject.versionMoshi"
     implementation "com.squareup.moshi:moshi-kotlin:$rootProject.versionMoshi"
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:$rootProject.versionMoshi")
+
 
 
     // Paging 3

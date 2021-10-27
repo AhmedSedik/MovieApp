@@ -9,11 +9,11 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class Credits(
 
-    @Json(name = "id")
+    @field:Json(name = "id")
     val id: Int?,
-    @Json(name = "cast")
+    @field:Json(name = "cast")
     val casts: List<Cast>,
-    @Json(name = "crew")
+    @field:Json(name = "crew")
     val crews: List<Crew>
 
 )

@@ -23,7 +23,7 @@ data class MovieDetails(
  @ColumnInfo(name = "vote_average") val voteAverage: Double?,
  @ColumnInfo(name = "vote_count") val voteCount: Int?,
  @ColumnInfo(name = "status") val status: String,
- @ColumnInfo(name = "recommendations") val recommendations: List<Movies>?,
+ @ColumnInfo(name = "recommendations") val recommendations: List<Movie>?,
  @ColumnInfo(name = "cast") val cast: List<Cast>?,
 
  // AppendToResponse
@@ -53,7 +53,7 @@ data class MovieDetails(
   @ColumnInfo(name = "order") val order: Int,
  )
 
- data class Movies(
+/* data class Movies(
   @ColumnInfo(name = "adult") val adult: Boolean,
   @ColumnInfo(name = "backdrop_path") val backdropPath: String?,
   @ColumnInfo(name = "id") val id: Long,
@@ -67,5 +67,5 @@ data class MovieDetails(
   @ColumnInfo(name = "video") val video: Boolean,
   @ColumnInfo(name = "vote_average") val voteAverage: Double,
   @ColumnInfo(name = "vote_count") val voteCount: Int,
- )
+ )*/
 }

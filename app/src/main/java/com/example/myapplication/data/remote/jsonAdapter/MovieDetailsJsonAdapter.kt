@@ -1,5 +1,6 @@
 package com.example.myapplication.data.remote.jsonAdapter
 
+import com.example.myapplication.data.model.entity.Movie
 import com.example.myapplication.data.model.entity.MovieDetails
 import com.example.myapplication.data.remote.Genre
 import com.example.myapplication.data.remote.movies.MovieDetailsDto
@@ -28,7 +29,7 @@ class MovieDetailsJsonAdapter {
                 voteCount ?: 0,
                 status.orEmpty(),
                 recommendations.results?.mapNotNull {
-                    MovieDetails.Movies(
+                   Movie(
                         it.adult ?: false,
                         it.backdropPath,
                         it.id ?: return null,
@@ -41,7 +42,8 @@ class MovieDetailsJsonAdapter {
                         it.title.orEmpty(),
                         it.video ?: false,
                         it.voteAverage ?: 0.0,
-                        it.voteCount ?: 0
+                        it.voteCount ?: 0,
+                       apiPageIndex = null
                     )
                 } ?: emptyList(),
                 credits.casts.map {

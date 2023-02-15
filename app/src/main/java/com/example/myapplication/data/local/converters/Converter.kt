@@ -43,29 +43,29 @@ import java.lang.reflect.Type
     @TypeConverter
     fun fromMoviesJson(
         value: String
-    ): List<MovieDetails.Movies>? {
+    ): List<Movie>? {
         val type = Types.newParameterizedType(
             List::class.java,
-            MovieDetails.Movies::class.java)
+            Movie::class.java)
 
-        val adapter: JsonAdapter<List<MovieDetails.Movies>> = moshi.adapter(type)
+        val adapter: JsonAdapter<List<Movie>> = moshi.adapter(type)
         return if (value.isEmpty()) null else adapter.fromJson(value)
     }
 
     @TypeConverter
     fun toMoviesJson(
-        list: List<MovieDetails.Movies>
+        list: List<Movie>
     ): String {
         val type = Types.newParameterizedType(
             List::class.java,
-            MovieDetails.Movies::class.java)
+            Movie::class.java)
 
-        val adapter: JsonAdapter<List<MovieDetails.Movies>> = moshi.adapter(type)
+        val adapter: JsonAdapter<List<Movie>> = moshi.adapter(type)
         return adapter.toJson(list)
     }
 
     //gg
-    @TypeConverter
+    /*@TypeConverter
     fun fromMovieJson(
         value: String
     ): List<MovieResponse>? {
@@ -87,7 +87,7 @@ import java.lang.reflect.Type
 
         val adapter: JsonAdapter<List<MovieResponse>> = moshi.adapter(type)
         return adapter.toJson(list)
-    }
+    }*/
 
     @TypeConverter
     fun fromMovieGenreJson(
@@ -140,6 +140,19 @@ import java.lang.reflect.Type
     fun stringToSpokenLanguage(spokenLanguage: List<SpokenLanguage>): String {
         val gson= Gson()
         return gson.toJson(spokenLanguage)
+    }
+
+    //Recommendations
+    @TypeConverter
+    fun recommendationsToString(value: String): List<MovieResponse> {
+        val listType: Type = object : TypeToken<List<MovieResponse?>?>(){}.type
+        return Gson().fromJson(value,listType)
+    }
+
+    @TypeConverter
+    fun stringToRecommendation(recommendations: List<MovieResponse>): String {
+        val gson= Gson()
+        return gson.toJson(recommendations)
     }
 
     @TypeConverter
